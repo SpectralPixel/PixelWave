@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class MeshGenerator : MonoBehaviour
 {
 
     public static MeshGenerator Instance;
 
-    [SerializeField] private float size;
+    [SerializeField] private Vector3 cubePos;
     [SerializeField] private Material meshMaterial;
+
+    private Vector3[] meshVertices;
+    private int[] meshTriangles;
+    private int blocksPerChunk;
+    private int vertecesPerChunk;
 
     void Awake()
     {
@@ -17,10 +24,127 @@ public class MeshGenerator : MonoBehaviour
 
     void Start()
     {
-        CreateNewMesh(size, meshMaterial);
+        blocksPerChunk = WorldGenerator.Instance.BlocksPerChunk;
+        vertecesPerChunk = blocksPerChunk + 1;
+        //CreateNewCube(size, cubePos);
     }
 
-    void CreateNewMesh(float _size, Material _meshMaterial)
+    public void CreateNewMesh(float _size, int[] chunkData)
+    {
+        Mesh _mesh = new Mesh();
+
+        meshVertices = new Vector3[vertecesPerChunk * vertecesPerChunk * vertecesPerChunk];
+        for (int i = 0, z = 0; z <= blocksPerChunk; z++)
+        {
+            for (int y = 0; y <= blocksPerChunk; y++)
+            {
+                for (int x = 0; x <= blocksPerChunk; x++)
+                {
+                    meshVertices[i] = new Vector3(x, y, z);
+                    i++;
+                }
+            }
+        }
+
+        meshTriangles = new int[blocksPerChunk * blocksPerChunk * blocksPerChunk * 36];
+        int vertex = 0;
+        int triangle = 0;
+        for (int i = 0, z = 0; z < blocksPerChunk; z++)
+        {
+            for (int y = 0; y < blocksPerChunk; y++)
+            {
+                for (int x = 0; x < blocksPerChunk; x++)
+                {
+                    if ((chunkData[i] != 0))
+                    {
+                        // bottom
+                        meshTriangles[triangle + 0] = vertex + 0;
+                        meshTriangles[triangle + 1] = vertex + 1;
+                        meshTriangles[triangle + 2] = vertex + 0 + vertecesPerChunk * vertecesPerChunk;
+                        meshTriangles[triangle + 3] = vertex + 1;
+                        meshTriangles[triangle + 4] = vertex + 1 + vertecesPerChunk * vertecesPerChunk;
+                        meshTriangles[triangle + 5] = vertex + 0 + vertecesPerChunk * vertecesPerChunk;
+                        // left
+                        meshTriangles[triangle + 7] = vertex + 0 + vertecesPerChunk * vertecesPerChunk;
+                        meshTriangles[triangle + 8] = vertex + 0 + vertecesPerChunk * vertecesPerChunk + vertecesPerChunk;
+                        meshTriangles[triangle + 6] = vertex + 0;
+                        meshTriangles[triangle + 9] = vertex + 0;
+                        meshTriangles[triangle + 10] = vertex + 0 + vertecesPerChunk * vertecesPerChunk + vertecesPerChunk;
+                        meshTriangles[triangle + 11] = vertex + 0 + vertecesPerChunk;
+                        // front
+                        meshTriangles[triangle + 12] = vertex + 1 + vertecesPerChunk * vertecesPerChunk;
+                        meshTriangles[triangle + 13] = vertex + 1 + vertecesPerChunk * vertecesPerChunk + vertecesPerChunk;
+                        meshTriangles[triangle + 14] = vertex + 0 + vertecesPerChunk * vertecesPerChunk;
+                        meshTriangles[triangle + 15] = vertex + 0 + vertecesPerChunk * vertecesPerChunk;
+                        meshTriangles[triangle + 16] = vertex + 1 + vertecesPerChunk * vertecesPerChunk + vertecesPerChunk;
+                        meshTriangles[triangle + 17] = vertex + 0 + vertecesPerChunk * vertecesPerChunk + vertecesPerChunk;
+                        // back
+                        meshTriangles[triangle + 18] = vertex + 0;
+                        meshTriangles[triangle + 19] = vertex + 0 + vertecesPerChunk;
+                        meshTriangles[triangle + 20] = vertex + 1;
+                        meshTriangles[triangle + 21] = vertex + 1;
+                        meshTriangles[triangle + 22] = vertex + 0 + vertecesPerChunk;
+                        meshTriangles[triangle + 23] = vertex + 1 + vertecesPerChunk;
+                        // right
+                        meshTriangles[triangle + 24] = vertex + 1;
+                        meshTriangles[triangle + 25] = vertex + 1 + vertecesPerChunk;
+                        meshTriangles[triangle + 26] = vertex + 1 + vertecesPerChunk * vertecesPerChunk;
+                        meshTriangles[triangle + 27] = vertex + 1 + vertecesPerChunk * vertecesPerChunk;
+                        meshTriangles[triangle + 28] = vertex + 1 + vertecesPerChunk;
+                        meshTriangles[triangle + 29] = vertex + 1 + vertecesPerChunk * vertecesPerChunk + vertecesPerChunk;
+                        // top
+                        meshTriangles[triangle + 30] = vertex + 0 + vertecesPerChunk;
+                        meshTriangles[triangle + 31] = vertex + 0 + vertecesPerChunk * vertecesPerChunk + vertecesPerChunk;
+                        meshTriangles[triangle + 32] = vertex + 1 + vertecesPerChunk;
+                        meshTriangles[triangle + 33] = vertex + 1 + vertecesPerChunk;
+                        meshTriangles[triangle + 34] = vertex + 0 + vertecesPerChunk * vertecesPerChunk + vertecesPerChunk;
+                        meshTriangles[triangle + 35] = vertex + 1 + vertecesPerChunk * vertecesPerChunk + vertecesPerChunk;
+                    }
+
+                    vertex++;
+                    triangle += 36;
+                    i++;
+                }
+
+                vertex++;
+            }
+
+            vertex += vertecesPerChunk;
+
+            /*int[] _meshTriangles = new int[]
+            {
+                0, 1, 3,        1, 2, 3,        // Bottom	
+                4, 5, 7,        5, 6, 7,        // Left
+                8, 9, 11,       9, 10, 11,      // Front
+                12, 13, 15,     13, 14, 15,     // Back
+                16, 17, 19,     17, 18, 19,	    // Right
+                20, 21, 23,     21, 22, 23,	    // Top
+            };*/
+
+        }
+
+        UpdateMesh(_mesh);
+    }
+
+    void UpdateMesh(Mesh _mesh)
+    {
+        _mesh.Clear();
+
+        _mesh.vertices = meshVertices;
+        _mesh.triangles = meshTriangles;
+        _mesh.RecalculateNormals();
+        _mesh.Optimize();
+
+        GameObject _meshObject = new GameObject("Mesh101");
+        MeshFilter meshFilter = _meshObject.AddComponent<MeshFilter>();
+        MeshRenderer meshRenderer = _meshObject.AddComponent<MeshRenderer>();
+        _meshObject.transform.SetParent(gameObject.transform);
+
+        meshFilter.mesh = _mesh;
+        meshRenderer.material = meshMaterial;
+    }
+
+    void CreateNewCube(float _size, Vector3 _position)
     {
         // create cube: https://gist.github.com/prucha/866b9535d525adc984c4fe883e73a6c7
         // create plane: https://docs.unity.cn/560/Documentation/Manual/Example-CreatingaBillboardPlane.html
@@ -29,14 +153,14 @@ public class MeshGenerator : MonoBehaviour
 
         Vector3[] _meshVertexCoordinates = new Vector3[8];
 
-        _meshVertexCoordinates[0] = new Vector3(-size * 0.5f, -size * 0.5f, -size * 0.5f); // * 0.5f to center the cube around the origin position
-        _meshVertexCoordinates[1] = new Vector3( size * 0.5f, -size * 0.5f, -size * 0.5f);
-        _meshVertexCoordinates[2] = new Vector3( size * 0.5f, -size * 0.5f, size * 0.5f );
-        _meshVertexCoordinates[3] = new Vector3(-size * 0.5f, -size * 0.5f, size * 0.5f );
-        _meshVertexCoordinates[4] = new Vector3(-size * 0.5f,  size * 0.5f, -size * 0.5f);
-        _meshVertexCoordinates[5] = new Vector3( size * 0.5f,  size * 0.5f, -size * 0.5f);
-        _meshVertexCoordinates[6] = new Vector3( size * 0.5f,  size * 0.5f, size * 0.5f );
-        _meshVertexCoordinates[7] = new Vector3(-size * 0.5f,  size * 0.5f, size * 0.5f );
+        _meshVertexCoordinates[0] = new Vector3(-blocksPerChunk * 0.5f + _position.x, -blocksPerChunk * 0.5f + _position.y, -blocksPerChunk * 0.5f + _position.z); // * 0.5f to center the cube around the origin position
+        _meshVertexCoordinates[1] = new Vector3(blocksPerChunk * 0.5f + _position.x, -blocksPerChunk * 0.5f + _position.y, -blocksPerChunk * 0.5f + _position.z);
+        _meshVertexCoordinates[2] = new Vector3(blocksPerChunk * 0.5f + _position.x, -blocksPerChunk * 0.5f + _position.y, blocksPerChunk * 0.5f + _position.z);
+        _meshVertexCoordinates[3] = new Vector3(-blocksPerChunk * 0.5f + _position.x, -blocksPerChunk * 0.5f + _position.y, blocksPerChunk * 0.5f + _position.z);
+        _meshVertexCoordinates[4] = new Vector3(-blocksPerChunk * 0.5f + _position.x, blocksPerChunk * 0.5f + _position.y, -blocksPerChunk * 0.5f + _position.z);
+        _meshVertexCoordinates[5] = new Vector3(blocksPerChunk * 0.5f + _position.x, blocksPerChunk * 0.5f + _position.y, -blocksPerChunk * 0.5f + _position.z);
+        _meshVertexCoordinates[6] = new Vector3(blocksPerChunk * 0.5f + _position.x, blocksPerChunk * 0.5f + _position.y, blocksPerChunk * 0.5f + _position.z);
+        _meshVertexCoordinates[7] = new Vector3(-blocksPerChunk * 0.5f + _position.x, blocksPerChunk * 0.5f + _position.y, blocksPerChunk * 0.5f + _position.z);
 
         Vector3[] _c = _meshVertexCoordinates;
         Vector3[] _meshVertices = new Vector3[]
@@ -93,12 +217,12 @@ public class MeshGenerator : MonoBehaviour
 
         /*int[] _meshTriangles = new int[]
         {
-            3, 1, 0,        3, 2, 1,        // Bottom	
-	        7, 5, 4,        7, 6, 5,        // Left
-	        11, 9, 8,       11, 10, 9,      // Front
-	        15, 13, 12,     15, 14, 13,     // Back
-	        19, 17, 16,     19, 18, 17,	    // Right
-	        23, 21, 20,     23, 22, 21,	    // Top
+            0, 1, 3,        1, 2, 3,        // Bottom	
+	        4, 5, 7,        5, 6, 7,        // Left
+	        8, 9, 11,       9, 10, 11,      // Front
+	        12, 13, 15,     13, 14, 15,     // Back
+	        16, 17, 19,     17, 18, 19,	    // Right
+	        20, 21, 23,     21, 22, 23,	    // Top
         };*/
 
         _mesh.vertices = _meshVertices; // add corners to mesh
@@ -113,6 +237,16 @@ public class MeshGenerator : MonoBehaviour
         _meshObject.transform.SetParent(gameObject.transform);
 
         meshFilter.mesh = _mesh;
-        meshRenderer.material = _meshMaterial;
+        meshRenderer.material = meshMaterial;
+    }
+    private void OnDrawGizmos()
+    {
+        if (meshVertices == null) return;
+
+        for (int i = 0; i < meshVertices.Length; i++)
+        {
+            Gizmos.color = Color.HSVToRGB(((float)i / meshVertices.Length), 1f, 1f);
+            Gizmos.DrawSphere(meshVertices[i], .1f);
+        }
     }
 }
