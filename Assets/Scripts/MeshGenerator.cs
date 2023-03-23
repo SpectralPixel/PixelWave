@@ -5,8 +5,15 @@ using UnityEngine;
 public class MeshGenerator : MonoBehaviour
 {
 
+    public static MeshGenerator Instance;
+
     [SerializeField] private float size;
     [SerializeField] private Material meshMaterial;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
