@@ -29,7 +29,7 @@ public class MeshGenerator : MonoBehaviour
         //CreateNewCube(size, cubePos);
     }
 
-    public void CreateNewMesh(float _size, int[] chunkData)
+    public void CreateNewMesh(float _size, Block[] chunkData)
     {
         Mesh _mesh = new Mesh();
 
@@ -57,7 +57,7 @@ public class MeshGenerator : MonoBehaviour
             {
                 for (int x = 0; x < blocksPerChunk; x++)
                 {
-                    if ((chunkData[i] != 0))
+                    if ((chunkData[i].blockID != 0))
                     {
                         // bottom
                         meshTriangles[triangle + 0] = vertex + 0;

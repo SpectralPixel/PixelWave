@@ -6,9 +6,9 @@ public class WorldChunk
 {
     Vector3Int position;
     int size;
-    int[] chunkData;
+    Block[] chunkData;
 
-    public WorldChunk(Vector3Int _position, int _size, int[] _chunkData)
+    public WorldChunk(Vector3Int _position, int _size, Block[] _chunkData)
     {
         position = _position;
         size = _size;
@@ -20,11 +20,7 @@ public class WorldChunk
     public void UpdateChunk(Vector3Int _position, int _newBlock)
     {
         int _updatePosition = GetPositionInChunkData(_position);
-        chunkData[_updatePosition] = _newBlock;
-    }
-    public void UpdateChunk(int _position, int _newBlock)
-    {
-        chunkData[_position] = _newBlock;
+        chunkData[_updatePosition] = new Block(_newBlock, _position);
     }
 
     private int GetPositionInChunkData(Vector3Int _position)
