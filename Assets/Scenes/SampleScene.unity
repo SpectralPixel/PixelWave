@@ -301,8 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5b94b68f709f444b5055f6be31f562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  solidThreshold: 0.4
-  BlocksPerChunk: 5
+  solidThreshold: 0.5
+  BlocksPerChunk: 4
   VertecesPerChunk: 0
 --- !u!1 &410087039
 GameObject:

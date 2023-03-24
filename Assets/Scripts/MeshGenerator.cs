@@ -29,7 +29,7 @@ public class MeshGenerator : MonoBehaviour
         //CreateNewCube(size, cubePos);
     }
 
-    public void CreateNewMesh(float _size, Block[] chunkData)
+    public void CreateNewMesh(WorldChunk _chunk)
     {
         Mesh _mesh = new Mesh();
 
@@ -57,50 +57,122 @@ public class MeshGenerator : MonoBehaviour
             {
                 for (int x = 0; x < blocksPerChunk; x++)
                 {
-                    if ((chunkData[i].blockID != 0))
+                    if ((_chunk.ChunkData[i].blockID != 0))
                     {
                         // bottom
-                        meshTriangles[triangle + 0] = vertex + 0;
-                        meshTriangles[triangle + 1] = vertex + 1;
-                        meshTriangles[triangle + 2] = vertex + 0 + _forward;
-                        meshTriangles[triangle + 3] = vertex + 1;
-                        meshTriangles[triangle + 4] = vertex + 1 + _forward;
-                        meshTriangles[triangle + 5] = vertex + 0 + _forward;
+                        if ((y % blocksPerChunk - 1 != -1))
+                        {
+                            meshTriangles[triangle + 0] = vertex + 0;
+                            meshTriangles[triangle + 1] = vertex + 1;
+                            meshTriangles[triangle + 2] = vertex + 0 + _forward;
+                            meshTriangles[triangle + 3] = vertex + 1;
+                            meshTriangles[triangle + 4] = vertex + 1 + _forward;
+                            meshTriangles[triangle + 5] = vertex + 0 + _forward;
+                        }
+                        else if (WorldGenerator.Instance.WorldChunks[_chunk.Position].GetBlock(new Vector3Int(x, y - 1, z)).solid)
+                        {
+                            meshTriangles[triangle + 0] = vertex + 0;
+                            meshTriangles[triangle + 1] = vertex + 1;
+                            meshTriangles[triangle + 2] = vertex + 0 + _forward;
+                            meshTriangles[triangle + 3] = vertex + 1;
+                            meshTriangles[triangle + 4] = vertex + 1 + _forward;
+                            meshTriangles[triangle + 5] = vertex + 0 + _forward;
+                        }
                         // left
-                        meshTriangles[triangle + 7] = vertex + 0 + _forward;
-                        meshTriangles[triangle + 8] = vertex + 0 + _forward + _up;
-                        meshTriangles[triangle + 6] = vertex + 0;
-                        meshTriangles[triangle + 9] = vertex + 0;
-                        meshTriangles[triangle + 10] = vertex + 0 + _forward + _up;
-                        meshTriangles[triangle + 11] = vertex + 0 + _up;
+                        if ((x % blocksPerChunk - 1 != -1)/* && (WorldGenerator.Instance.WorldChunks.ContainsKey(_chunk.Position + new Vector3Int(-1, 0, 0)) ? WorldGenerator.Instance.WorldChunks[_chunk.Position + new Vector3Int(-1, 0, 0)].GetBlock(new Vector3Int(blocksPerChunk - x, y, z)).solid false : true)*/)
+                        {
+                            meshTriangles[triangle + 7] = vertex + 0 + _forward;
+                            meshTriangles[triangle + 8] = vertex + 0 + _forward + _up;
+                            meshTriangles[triangle + 6] = vertex + 0;
+                            meshTriangles[triangle + 9] = vertex + 0;
+                            meshTriangles[triangle + 10] = vertex + 0 + _forward + _up;
+                            meshTriangles[triangle + 11] = vertex + 0 + _up;
+                        }
+                        else if (WorldGenerator.Instance.WorldChunks[_chunk.Position].GetBlock(new Vector3Int(x - 1, y, z)).solid)
+                        {
+                            meshTriangles[triangle + 7] = vertex + 0 + _forward;
+                            meshTriangles[triangle + 8] = vertex + 0 + _forward + _up;
+                            meshTriangles[triangle + 6] = vertex + 0;
+                            meshTriangles[triangle + 9] = vertex + 0;
+                            meshTriangles[triangle + 10] = vertex + 0 + _forward + _up;
+                            meshTriangles[triangle + 11] = vertex + 0 + _up;
+                        }
                         // front
-                        meshTriangles[triangle + 12] = vertex + 1 + _forward;
-                        meshTriangles[triangle + 13] = vertex + 1 + _forward + _up;
-                        meshTriangles[triangle + 14] = vertex + 0 + _forward;
-                        meshTriangles[triangle + 15] = vertex + 0 + _forward;
-                        meshTriangles[triangle + 16] = vertex + 1 + _forward + _up;
-                        meshTriangles[triangle + 17] = vertex + 0 + _forward + _up;
+                        if ((z % blocksPerChunk + 1 != blocksPerChunk))
+                        {
+                            meshTriangles[triangle + 12] = vertex + 1 + _forward;
+                            meshTriangles[triangle + 13] = vertex + 1 + _forward + _up;
+                            meshTriangles[triangle + 14] = vertex + 0 + _forward;
+                            meshTriangles[triangle + 15] = vertex + 0 + _forward;
+                            meshTriangles[triangle + 16] = vertex + 1 + _forward + _up;
+                            meshTriangles[triangle + 17] = vertex + 0 + _forward + _up;
+                        }
+                        else if (WorldGenerator.Instance.WorldChunks[_chunk.Position].GetBlock(new Vector3Int(x, y, z + 1)).solid)
+                        {
+                            meshTriangles[triangle + 12] = vertex + 1 + _forward;
+                            meshTriangles[triangle + 13] = vertex + 1 + _forward + _up;
+                            meshTriangles[triangle + 14] = vertex + 0 + _forward;
+                            meshTriangles[triangle + 15] = vertex + 0 + _forward;
+                            meshTriangles[triangle + 16] = vertex + 1 + _forward + _up;
+                            meshTriangles[triangle + 17] = vertex + 0 + _forward + _up;
+                        }
                         // back
-                        meshTriangles[triangle + 18] = vertex + 0;
-                        meshTriangles[triangle + 19] = vertex + 0 + _up;
-                        meshTriangles[triangle + 20] = vertex + 1;
-                        meshTriangles[triangle + 21] = vertex + 1;
-                        meshTriangles[triangle + 22] = vertex + 0 + _up;
-                        meshTriangles[triangle + 23] = vertex + 1 + _up;
+                        if ((z % blocksPerChunk - 1 != -1))
+                        {
+                            meshTriangles[triangle + 18] = vertex + 0;
+                            meshTriangles[triangle + 19] = vertex + 0 + _up;
+                            meshTriangles[triangle + 20] = vertex + 1;
+                            meshTriangles[triangle + 21] = vertex + 1;
+                            meshTriangles[triangle + 22] = vertex + 0 + _up;
+                            meshTriangles[triangle + 23] = vertex + 1 + _up;
+                        }
+                        else if (WorldGenerator.Instance.WorldChunks[_chunk.Position].GetBlock(new Vector3Int(x, y, z - 1)).solid)
+                        {
+                            meshTriangles[triangle + 18] = vertex + 0;
+                            meshTriangles[triangle + 19] = vertex + 0 + _up;
+                            meshTriangles[triangle + 20] = vertex + 1;
+                            meshTriangles[triangle + 21] = vertex + 1;
+                            meshTriangles[triangle + 22] = vertex + 0 + _up;
+                            meshTriangles[triangle + 23] = vertex + 1 + _up;
+                        }
                         // right
-                        meshTriangles[triangle + 24] = vertex + 1;
-                        meshTriangles[triangle + 25] = vertex + 1 + _up;
-                        meshTriangles[triangle + 26] = vertex + 1 + _forward;
-                        meshTriangles[triangle + 27] = vertex + 1 + _forward;
-                        meshTriangles[triangle + 28] = vertex + 1 + _up;
-                        meshTriangles[triangle + 29] = vertex + 1 + _forward + _up;
+                        if ((x % blocksPerChunk + 1 != blocksPerChunk))
+                        {
+                            meshTriangles[triangle + 24] = vertex + 1;
+                            meshTriangles[triangle + 25] = vertex + 1 + _up;
+                            meshTriangles[triangle + 26] = vertex + 1 + _forward;
+                            meshTriangles[triangle + 27] = vertex + 1 + _forward;
+                            meshTriangles[triangle + 28] = vertex + 1 + _up;
+                            meshTriangles[triangle + 29] = vertex + 1 + _forward + _up;
+                        }
+                        else if (WorldGenerator.Instance.WorldChunks[_chunk.Position].GetBlock(new Vector3Int(x + 1, y, z)).solid)
+                        {
+                            meshTriangles[triangle + 24] = vertex + 1;
+                            meshTriangles[triangle + 25] = vertex + 1 + _up;
+                            meshTriangles[triangle + 26] = vertex + 1 + _forward;
+                            meshTriangles[triangle + 27] = vertex + 1 + _forward;
+                            meshTriangles[triangle + 28] = vertex + 1 + _up;
+                            meshTriangles[triangle + 29] = vertex + 1 + _forward + _up;
+                        }
                         // top
-                        meshTriangles[triangle + 30] = vertex + 0 + _up;
-                        meshTriangles[triangle + 31] = vertex + 0 + _forward + _up;
-                        meshTriangles[triangle + 32] = vertex + 1 + _up;
-                        meshTriangles[triangle + 33] = vertex + 1 + _up;
-                        meshTriangles[triangle + 34] = vertex + 0 + _forward + _up;
-                        meshTriangles[triangle + 35] = vertex + 1 + _forward + _up;
+                        if ((y % blocksPerChunk + 1 != blocksPerChunk))
+                        {
+                            meshTriangles[triangle + 30] = vertex + 0 + _up;
+                            meshTriangles[triangle + 31] = vertex + 0 + _forward + _up;
+                            meshTriangles[triangle + 32] = vertex + 1 + _up;
+                            meshTriangles[triangle + 33] = vertex + 1 + _up;
+                            meshTriangles[triangle + 34] = vertex + 0 + _forward + _up;
+                            meshTriangles[triangle + 35] = vertex + 1 + _forward + _up;
+                        }
+                        else if (WorldGenerator.Instance.WorldChunks[_chunk.Position].GetBlock(new Vector3Int(x, y + 1, z)).solid)
+                        {
+                            meshTriangles[triangle + 30] = vertex + 0 + _up;
+                            meshTriangles[triangle + 31] = vertex + 0 + _forward + _up;
+                            meshTriangles[triangle + 32] = vertex + 1 + _up;
+                            meshTriangles[triangle + 33] = vertex + 1 + _up;
+                            meshTriangles[triangle + 34] = vertex + 0 + _forward + _up;
+                            meshTriangles[triangle + 35] = vertex + 1 + _forward + _up;
+                        }
                     }
 
                     vertex++;

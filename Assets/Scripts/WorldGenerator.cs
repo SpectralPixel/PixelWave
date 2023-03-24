@@ -11,7 +11,7 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private float solidThreshold;
 
     public int BlocksPerChunk; // 16
-    [HideInInspector] public int VertecesPerChunk; // 16
+    [HideInInspector] public int VertecesPerChunk; // BlocksPerChunk + 1
     public Dictionary<Vector3Int, WorldChunk> WorldChunks;
 
     void Awake()

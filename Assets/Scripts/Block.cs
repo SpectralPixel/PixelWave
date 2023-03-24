@@ -14,7 +14,7 @@ public class Block
     {
         blockID = _blockID;
         localPosition = _localPosition;
-        solid = false;
+        solid = true;
 
         switch (blockID)
         {
