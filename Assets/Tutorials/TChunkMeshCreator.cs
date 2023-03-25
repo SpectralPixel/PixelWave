@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
-public class MeshGenerator
+public class TChunkMeshCreator
 {
 
-    public class FaceData
+    public class TFaceData
     {
-        public FaceData(Vector3[] _vertices, int[] _triangles)
+        public TFaceData(Vector3[] _vertices, int[] _triangles)
         {
             Vertices = _vertices;
             Indices = _triangles;
@@ -108,70 +109,56 @@ public class MeshGenerator
     };
 
     #endregion
-    #region InitializeCubeFaces
 
-    private Dictionary<Vector3Int, FaceData> cubeFaces = new Dictionary<Vector3Int, FaceData>();
+    private Dictionary<Vector3Int, TFaceData> CubeFaces = new Dictionary<Vector3Int, TFaceData>();
 
-    public MeshGenerator()
+    public TChunkMeshCreator()
     {
-        cubeFaces = new Dictionary<Vector3Int, FaceData>();
+        CubeFaces = new Dictionary<Vector3Int, TFaceData>();
 
         for (int i = 0; i < CheckDirections.Length; i++)
         {
-            if (CheckDirections[i] == Vector3Int.up)
-            {
-                cubeFaces.Add(CheckDirections[i], new FaceData(UpFace, UpTris));
-            }
-            else if (CheckDirections[i] == Vector3Int.down)
-            {
-                cubeFaces.Add(CheckDirections[i], new FaceData(DownFace, DownTris));
-            }
-            else if (CheckDirections[i] == Vector3Int.forward)
-            {
-                cubeFaces.Add(CheckDirections[i], new FaceData(ForwardFace, ForwardTris));
-            }
-            else if (CheckDirections[i] == Vector3Int.back)
-            {
-                cubeFaces.Add(CheckDirections[i], new FaceData(BackFace, BackTris));
-            }
-            else if (CheckDirections[i] == Vector3Int.left)
-            {
-                cubeFaces.Add(CheckDirections[i], new FaceData(LeftFace, LeftTris));
-            }
-            else if (CheckDirections[i] == Vector3Int.right)
-            {
-                cubeFaces.Add(CheckDirections[i], new FaceData(RightFace, RightTris));
+            if (CheckDirections[i] == Vector3Int.up) {
+                CubeFaces.Add(CheckDirections[i], new TFaceData(UpFace, UpTris));
+            } else if (CheckDirections[i] == Vector3Int.down) {
+                CubeFaces.Add(CheckDirections[i], new TFaceData(DownFace, DownTris));
+            } else if (CheckDirections[i] == Vector3Int.forward) {
+                CubeFaces.Add(CheckDirections[i], new TFaceData(ForwardFace, ForwardTris));
+            } else if (CheckDirections[i] == Vector3Int.back) {
+                CubeFaces.Add(CheckDirections[i], new TFaceData(BackFace, BackTris));
+            } else if (CheckDirections[i] == Vector3Int.left) {
+                CubeFaces.Add(CheckDirections[i], new TFaceData(LeftFace, LeftTris));
+            } else if (CheckDirections[i] == Vector3Int.right) {
+                CubeFaces.Add(CheckDirections[i], new TFaceData(RightFace, RightTris));
             }
         }
     }
 
-    #endregion
-
-    public Mesh CreateNewMesh(WorldChunk _chunk)
+    public Mesh CreateMeshFromData(int[,,] _data)
     {
-        Mesh _mesh = new Mesh();
-
-        int _blocksPerChunk = _chunk.size;
-
         List<Vector3> _vertices = new List<Vector3>();
         List<int> _indices = new List<int>();
 
-        for (int x = 0; x < _blocksPerChunk; x++) // loops over all dimensions
+        Mesh _mesh = new Mesh();
+
+        for (int x = 0; x < TWorldGenerator.ChunkSize.x; x++) // loops over all dimensions
         {
-            for (int y = 0; y < _blocksPerChunk; y++)
+            for (int y = 0; y < TWorldGenerator.ChunkSize.y; y++)
             {
-                for (int z = 0; z < _blocksPerChunk; z++)
+                for (int z = 0; z < TWorldGenerator.ChunkSize.z; z++)
                 {
+                    Vector3Int _blockPos = new Vector3Int(x, y, z);
+
                     for (int i = 0; i < CheckDirections.Length; i++)
                     {
-                        bool _currentBlockIsSolid = _chunk.GetBlock(new Vector3Int(x, y, z)).solid;
+                        Vector3Int _blockToCheck = _blockPos + CheckDirections[i];
                         try
                         {
-                            if (!_currentBlockIsSolid)
+                            if (_data[_blockToCheck.x, _blockToCheck.y, _blockToCheck.z] == 0)
                             {
-                                if (_currentBlockIsSolid)
+                                if (_data[_blockPos.x, _blockPos.y, _blockPos.z] != 0)
                                 {
-                                    FaceData _faceToApply = cubeFaces[CheckDirections[i]];
+                                    TFaceData _faceToApply = CubeFaces[CheckDirections[i]];
 
                                     foreach (Vector3 _vertice in _faceToApply.Vertices)
                                     {
@@ -187,9 +174,9 @@ public class MeshGenerator
                         }
                         catch (System.Exception e)
                         {
-                            if (_currentBlockIsSolid)
+                            if (_data[_blockPos.x, _blockPos.y, _blockPos.z] != 0)
                             {
-                                FaceData _faceToApply = cubeFaces[CheckDirections[i]];
+                                TFaceData _faceToApply = CubeFaces[CheckDirections[i]];
 
                                 foreach (Vector3 _vertice in _faceToApply.Vertices)
                                 {
@@ -207,15 +194,14 @@ public class MeshGenerator
             }
         }
 
-        _mesh.Clear();
-
         _mesh.SetVertices(_vertices);
         _mesh.SetIndices(_indices, MeshTopology.Triangles, 0);
         _mesh.RecalculateBounds();
         _mesh.RecalculateTangents();
         _mesh.RecalculateNormals();
-        _mesh.Optimize();
 
         return _mesh;
+
     }
+
 }

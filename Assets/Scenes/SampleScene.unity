@@ -123,6 +123,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &222632575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 222632577}
+  - component: {fileID: 222632576}
+  m_Layer: 0
+  m_Name: RytechMCGen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &222632576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222632575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6af6c3fb23aa14785667e81cdb0669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoiseScale: {x: 1, y: 1}
+  NoiseOffset: {x: 1, y: 1}
+  HeightOffset: 60
+  HeightIntensity: 5
+  MeshMaterial: {fileID: 2100000, guid: ec235ca72744fde408f67ded8bda893b, type: 2}
+--- !u!4 &222632577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222632575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +299,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 385497911}
-  - component: {fileID: 385497912}
   - component: {fileID: 385497913}
   m_Layer: 0
   m_Name: World
@@ -275,20 +323,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &385497912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385497910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37e6b7fb4de157c438463866622dad83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cubePos: {x: 0, y: 0, z: 0}
-  meshMaterial: {fileID: 2100000, guid: ec235ca72744fde408f67ded8bda893b, type: 2}
 --- !u!114 &385497913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidThreshold: 0.5
   BlocksPerChunk: 4
+  meshMaterial: {fileID: 2100000, guid: ec235ca72744fde408f67ded8bda893b, type: 2}
   VertecesPerChunk: 0
 --- !u!1 &410087039
 GameObject:
