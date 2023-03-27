@@ -9,12 +9,14 @@ public class Block
     public Vector3Int LocalPosition;
     public string BlockName;
     public bool IsSolid;
+    public bool IsTransparent;
 
     public Block(int _blockID, Vector3Int _localPosition)
     {
         BlockID = _blockID;
         LocalPosition = _localPosition;
         IsSolid = true;
+        IsTransparent = false;
 
         switch (BlockID)
         {
@@ -39,6 +41,7 @@ public class Block
                 break;
             case 6:
                 BlockName = "Leaves";
+                IsTransparent = true;
                 break;
         }
     }
