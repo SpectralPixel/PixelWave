@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static MeshGenerator;
 
 public class WorldChunk
 {
@@ -22,6 +23,13 @@ public class WorldChunk
 
     public Block GetBlock(Vector3Int _position)
     {
-        return ChunkData[_position.x, _position.y, _position.z];
+        try
+        {
+            return ChunkData[_position.x, _position.y, _position.z];
+        }
+        catch (System.Exception e)
+        {
+            return new Block(0, new Vector3Int(0, 0, 0));
+        }
     }
 }

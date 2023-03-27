@@ -152,22 +152,25 @@ public class MeshGenerator
         Mesh _mesh = new Mesh();
 
         int _blocksPerChunk = _chunk.size;
+        int _verticesPerChunk = _blocksPerChunk + 1;
 
         List<Vector3> _vertices = new List<Vector3>();
         List<int> _indices = new List<int>();
 
-        for (int x = 0; x < _blocksPerChunk; x++) // loops over all dimensions
+        for (int x = 0; x < _verticesPerChunk; x++) // loops over all dimensions
         {
-            for (int y = 0; y < _blocksPerChunk; y++)
+            for (int y = 0; y < _verticesPerChunk; y++)
             {
-                for (int z = 0; z < _blocksPerChunk; z++)
+                for (int z = 0; z < _verticesPerChunk; z++)
                 {
+                    bool _currentBlockIsSolid = _chunk.GetBlock(new Vector3Int(x, y, z)).solid;
+
                     for (int i = 0; i < CheckDirections.Length; i++)
                     {
-                        bool _currentBlockIsSolid = _chunk.GetBlock(new Vector3Int(x, y, z)).solid;
+                        bool _checkedBlockIsSolid = _chunk.GetBlock((new Vector3Int(x, y, z) + CheckDirections[i])).solid;
                         try
                         {
-                            if (!_currentBlockIsSolid)
+                            if (!_checkedBlockIsSolid)
                             {
                                 if (_currentBlockIsSolid)
                                 {
@@ -214,7 +217,7 @@ public class MeshGenerator
         _mesh.RecalculateBounds();
         _mesh.RecalculateTangents();
         _mesh.RecalculateNormals();
-        _mesh.Optimize();
+        //_mesh.Optimize();
 
         return _mesh;
     }

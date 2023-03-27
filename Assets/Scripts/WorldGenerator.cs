@@ -39,7 +39,7 @@ public class WorldGenerator : MonoBehaviour
                 for (int x = 0; x <= _blocksPerChunk; x++)
                 {
                     float _randomNumber = Random.Range(0.0f, 1.0f);
-                    _newChunkData[x, y, z] = new Block((_randomNumber < solidThreshold ? 1 : 0), new Vector3(x, y, z));
+                    _newChunkData[x, y, z] = new Block((_randomNumber < solidThreshold ? 1 : 0), new Vector3Int(x, y, z));
                 }
             }
         }

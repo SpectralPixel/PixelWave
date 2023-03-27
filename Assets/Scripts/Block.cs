@@ -6,11 +6,11 @@ public class Block
 {
 
     public int blockID;
-    public Vector3 localPosition;
+    public Vector3Int localPosition;
     public string blockName;
     public bool solid;
 
-    public Block(int _blockID, Vector3 _localPosition)
+    public Block(int _blockID, Vector3Int _localPosition)
     {
         blockID = _blockID;
         localPosition = _localPosition;

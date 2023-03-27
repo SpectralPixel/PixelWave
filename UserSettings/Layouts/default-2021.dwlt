@@ -39,9 +39,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 793.6
+    x: 796
     y: 0
-    width: 364
+    width: 365.59998
     height: 244.4
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
@@ -69,12 +69,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 478.4
-    width: 1157.6
+    width: 1161.6
     height: 244.4
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 56
+  controlID: 49
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 54
+  controlID: 207
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -115,9 +115,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1157.6
+    x: 1161.6
     y: 0
-    width: 378.40002
+    width: 374.40002
     height: 722.8
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
@@ -146,8 +146,8 @@ MonoBehaviour:
     y: 0
     width: 283.2
     height: 478.4
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -163,24 +163,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 793.6
+    width: 796
     height: 244.4
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 16}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 16}
   - {fileID: 21}
   - {fileID: 15}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -271,12 +271,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1157.6
+    width: 1161.6
     height: 722.8
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 55
+  controlID: 48
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -296,12 +296,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1157.6
+    width: 1161.6
     height: 478.4
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 41
+  controlID: 40
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -319,10 +319,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 283.2
     y: 0
-    width: 874.39996
+    width: 878.39996
     height: 478.4
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -348,9 +348,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1157.6
+    x: 1161.6
     y: 73.6
-    width: 377.40002
+    width: 373.40002
     height: 701.8
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -360,8 +360,8 @@ MonoBehaviour:
   notificationClearTime: -1
   timeSinceLastRotation: -1
   currentBranchAndRemoteHasUpdate: 0
-  currentTrackingStatusHasUpdate: 0
-  currentStatusEntriesHasUpdate: 0
+  currentTrackingStatusHasUpdate: 1
+  currentStatusEntriesHasUpdate: 1
   repositoryProgressHasUpdate: 1
   appManagerProgressHasUpdate: 1
   changeTab: 3
@@ -511,146 +511,13 @@ MonoBehaviour:
     treeScroll: {x: 0, y: 0}
     treeChanges:
       assets:
-        keys:
-        - 00000000000000001000000000000000
-        - 91251939d221d55439f5217b4594ba24
-        - c80deaa5cdd9ebc42a630b20f69694cc
-        - d3fea2df8f73b5048a0fa5021d6a4abb
-        values:
-        - path: Assets
-          label: Assets
-          level: 0
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: Assets\Scripts
-          label: Scripts
-          level: 1
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: Assets\Tutorials
-          label: Tutorials
-          level: 1
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: Assets\Tutorials\BrackeysMeshGen.cs
-          label: BrackeysMeshGen.cs
-          level: 2
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Tutorials\BrackeysMeshGen.cs
-            fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Tutorials\BrackeysMeshGen.cs
-            projectPath: Assets\Tutorials\BrackeysMeshGen.cs
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
+        keys: []
+        values: []
       folders:
         keys:
-        - Assets
-        - Assets\Scripts
-        - Assets\Tutorials
         - UserSettings
         - UserSettings\Layouts
         values:
-        - path: Assets
-          label: Assets
-          level: 0
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: Assets\Scripts
-          label: Scripts
-          level: 1
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: Assets\Tutorials
-          label: Tutorials
-          level: 1
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
         - path: UserSettings
           label: UserSettings
           level: 0
@@ -715,150 +582,6 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-      - path: Assets
-        label: Assets
-        level: 0
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: Assets\Scripts
-        label: Scripts
-        level: 1
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: Assets\Scripts\BrackeysMeshGen.cs
-        label: BrackeysMeshGen.cs
-        level: 2
-        isFolder: 0
-        isContainer: 1
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Scripts\BrackeysMeshGen.cs
-          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\BrackeysMeshGen.cs
-          projectPath: Assets\Scripts\BrackeysMeshGen.cs
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 5
-      - path: Assets\Scripts\BrackeysMeshGen.cs.meta
-        label: BrackeysMeshGen.cs.meta
-        level: 3
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Scripts\BrackeysMeshGen.cs.meta
-          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\BrackeysMeshGen.cs.meta
-          projectPath: Assets\Scripts\BrackeysMeshGen.cs.meta
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 5
-      - path: Assets\Tutorials.meta
-        label: Tutorials.meta
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Tutorials.meta
-          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Tutorials.meta
-          projectPath: Assets\Tutorials.meta
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Tutorials
-        label: Tutorials
-        level: 1
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: Assets\Tutorials\BrackeysMeshGen.cs
-        label: BrackeysMeshGen.cs
-        level: 2
-        isFolder: 0
-        isContainer: 1
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Tutorials\BrackeysMeshGen.cs
-          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Tutorials\BrackeysMeshGen.cs
-          projectPath: Assets\Tutorials\BrackeysMeshGen.cs
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Tutorials\BrackeysMeshGen.cs.meta
-        label: BrackeysMeshGen.cs.meta
-        level: 3
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Tutorials\BrackeysMeshGen.cs.meta
-          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Tutorials\BrackeysMeshGen.cs.meta
-          projectPath: Assets\Tutorials\BrackeysMeshGen.cs.meta
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
       - path: UserSettings
         label: UserSettings
         level: 0
@@ -933,51 +656,21 @@ MonoBehaviour:
           indexStatus: 0
           workTreeStatus: 0
     gitStatusEntries:
-    - path: Assets\Scripts\BrackeysMeshGen.cs
-      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\BrackeysMeshGen.cs
-      projectPath: Assets\Scripts\BrackeysMeshGen.cs
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 5
-    - path: Assets\Scripts\BrackeysMeshGen.cs.meta
-      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\BrackeysMeshGen.cs.meta
-      projectPath: Assets\Scripts\BrackeysMeshGen.cs.meta
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 5
-    - path: Assets\Tutorials.meta
-      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Tutorials.meta
-      projectPath: Assets\Tutorials.meta
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Tutorials\BrackeysMeshGen.cs
-      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Tutorials\BrackeysMeshGen.cs
-      projectPath: Assets\Tutorials\BrackeysMeshGen.cs
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Tutorials\BrackeysMeshGen.cs.meta
-      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Tutorials\BrackeysMeshGen.cs.meta
-      projectPath: Assets\Tutorials\BrackeysMeshGen.cs.meta
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
     - path: UserSettings\Layouts\default-2021.dwlt
       fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\UserSettings\Layouts\default-2021.dwlt
       projectPath: UserSettings\Layouts\default-2021.dwlt
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    changedFilesText: 6 changed files
+    changedFilesText: 1 changed file
     lastCurrentBranchChangedEvent:
-      updatedTimeString: 2023-03-24T18:42:36.253+01:00
+      updatedTimeString: 2023-03-26T19:45:58.575+02:00
       cacheType: 1
     lastStatusEntriesChangedEvent:
-      updatedTimeString: 2023-03-24T19:19:07.983+01:00
+      updatedTimeString: 2023-03-26T20:10:19.843+02:00
       cacheType: 6
     lastLocksChangedEvent:
-      updatedTimeString: 2023-03-24T19:19:09.906+01:00
+      updatedTimeString: 2023-03-26T20:00:21.737+02:00
       cacheType: 7
   historyView:
     currentLogHasUpdate: 0
@@ -3764,13 +3457,13 @@ MonoBehaviour:
     m_Image: {fileID: 0}
     m_Tooltip: Url of the origin remote
   lastCurrentBranchAndRemoteChangedEvent:
-    updatedTimeString: 2023-03-24T18:23:15.688+01:00
+    updatedTimeString: 2023-03-26T19:40:59.815+02:00
     cacheType: 1
   lastTrackingStatusChangedEvent:
-    updatedTimeString: 2023-03-24T18:23:15.551+01:00
+    updatedTimeString: 2023-03-26T19:42:02.834+02:00
     cacheType: 5
   lastStatusEntriesChangedEvent:
-    updatedTimeString: 2023-03-24T18:24:14.994+01:00
+    updatedTimeString: 2023-03-26T19:42:02.802+02:00
     cacheType: 6
   pullButtonContent:
     m_Text: Pull
@@ -3845,7 +3538,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 552
-    width: 792.6
+    width: 795
     height: 223.4
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -3864,22 +3557,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Materials
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Materials
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c26b0000
-    m_LastClickedID: 27586
-    m_ExpandedIDs: 00000000be6b000000ca9a3b
+    m_SelectedIDs: ba6b0000
+    m_LastClickedID: 27578
+    m_ExpandedIDs: 00000000b26b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3984,9 +3677,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1157.6
+    x: 1161.6
     y: 73.6
-    width: 377.40002
+    width: 373.40002
     height: 701.8
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -4037,9 +3730,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 3e2bffff
-      m_LastClickedID: 0
-      m_ExpandedIDs: 30fbffff
+      m_SelectedIDs: c6690000
+      m_LastClickedID: 27078
+      m_ExpandedIDs: 30fbffffc6690000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -4086,7 +3779,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 283.2
     y: 73.6
-    width: 872.39996
+    width: 876.39996
     height: 457.4
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -4322,9 +4015,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 21.16777, y: 39.635967, z: 1.2677789}
+    m_Target: {x: 0.32742733, y: 10.456698, z: 14.7788315}
     speed: 2
-    m_Value: {x: 21.16777, y: 39.635967, z: 1.2677789}
+    m_Value: {x: 0.32742733, y: 10.456698, z: 14.7788315}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -4371,13 +4064,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.25508025, y: -0.73469555, z: 0.3675852, w: -0.51024735}
+    m_Target: {x: -0.01601972, y: -0.8994784, z: 0.03223989, w: -0.43594366}
     speed: 2
-    m_Value: {x: -0.2542749, y: -0.73513055, z: 0.36642486, w: -0.5105489}
+    m_Value: {x: -0.016016485, y: -0.89929664, z: 0.03223338, w: -0.4358556}
   m_Size:
-    m_Target: 21.055462
+    m_Target: 10
     speed: 2
-    m_Value: 21.055462
+    m_Value: 10
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -4423,9 +4116,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 793.60004
+    x: 796
     y: 552
-    width: 362
+    width: 363.59998
     height: 223.4
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -4473,23 +4166,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 362
+      width: 363.59998
       height: 202.4
     m_Scale: {x: 0.23425925, y: 0.23425925}
-    m_Translation: {x: 181, y: 101.2}
+    m_Translation: {x: 181.79999, y: 101.2}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -772.64825
+      x: -776.06323
       y: -432
-      width: 1545.2965
+      width: 1552.1265
       height: 864
     m_MinimalGUI: 1
   m_defaultScale: 0.23425925
-  m_LastWindowPixelSize: {x: 452.5, y: 279.25}
+  m_LastWindowPixelSize: {x: 454.49997, y: 279.25}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -4518,7 +4211,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 552
-    width: 792.6
+    width: 795
     height: 223.4
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
