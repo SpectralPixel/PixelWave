@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TWorldGenerator : MonoBehaviour
 {
-
+    [SerializeField] private TTextureLoader TextureLoaderInstance;
+    [Space]
     public static readonly Vector3Int ChunkSize = new Vector3Int(16, 256, 16);
     public Vector2 NoiseScale = Vector2.one;
     public Vector2 NoiseOffset = Vector2.zero;
@@ -49,7 +50,7 @@ public class TWorldGenerator : MonoBehaviour
         }
 
         GameObject _tempChunk = new GameObject("Chunk", new System.Type[] { typeof(MeshFilter), typeof(MeshRenderer) });
-        _tempChunk.GetComponent<MeshFilter>().mesh = new TChunkMeshCreator().CreateMeshFromData(tempData);
+        _tempChunk.GetComponent<MeshFilter>().mesh = new TChunkMeshCreator(TextureLoaderInstance).CreateMeshFromData(tempData);
         _tempChunk.GetComponent<MeshRenderer>().material = MeshMaterial;
     }
 

@@ -5,34 +5,40 @@ using UnityEngine;
 public class Block
 {
 
-    public int blockID;
-    public Vector3Int localPosition;
-    public string blockName;
-    public bool solid;
+    public int BlockID;
+    public Vector3Int LocalPosition;
+    public string BlockName;
+    public bool IsSolid;
 
     public Block(int _blockID, Vector3Int _localPosition)
     {
-        blockID = _blockID;
-        localPosition = _localPosition;
-        solid = true;
+        BlockID = _blockID;
+        LocalPosition = _localPosition;
+        IsSolid = true;
 
-        switch (blockID)
+        switch (BlockID)
         {
             case 0:
-                blockName = "Air";
-                solid = false;
+                BlockName = "Air";
+                IsSolid = false;
                 break;
             case 1:
-                blockName = "Solid";
+                BlockName = "Grass";
                 break;
             case 2:
-                blockName = "";
+                BlockName = "Dirt";
                 break;
             case 3:
-                blockName = "";
+                BlockName = "Stone";
                 break;
             case 4:
-                blockName = "";
+                BlockName = "Sand";
+                break;
+            case 5:
+                BlockName = "Wood";
+                break;
+            case 6:
+                BlockName = "Leaves";
                 break;
         }
     }

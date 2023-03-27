@@ -133,13 +133,14 @@ GameObject:
   m_Component:
   - component: {fileID: 222632577}
   - component: {fileID: 222632576}
+  - component: {fileID: 222632578}
   m_Layer: 0
   m_Name: RytechMCGen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &222632576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,11 +153,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6af6c3fb23aa14785667e81cdb0669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TextureLoaderInstance: {fileID: 222632578}
   NoiseScale: {x: 1, y: 1}
   NoiseOffset: {x: 1, y: 1}
   HeightOffset: 60
   HeightIntensity: 5
-  MeshMaterial: {fileID: 2100000, guid: ec235ca72744fde408f67ded8bda893b, type: 2}
+  MeshMaterial: {fileID: 2100000, guid: d661fb3c7c012f04688b83befb01039f, type: 2}
 --- !u!4 &222632577
 Transform:
   m_ObjectHideFlags: 0
@@ -172,6 +174,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &222632578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222632575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b931a1ef1a4b64aa0bcdfdc244c372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cubeTextures:
+  - TextureName: Grass
+    XTexture: {fileID: 721555036, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    YTexture: {fileID: 1567968917, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    ZTexture: {fileID: 721555036, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    SpecificFaceTextures:
+      Up: {fileID: 0}
+      Down: {fileID: 0}
+      Left: {fileID: 0}
+      Right: {fileID: 0}
+      Forward: {fileID: 0}
+      Back: {fileID: 0}
+  - TextureName: Dirt
+    XTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    YTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    ZTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    SpecificFaceTextures:
+      Up: {fileID: 0}
+      Down: {fileID: 0}
+      Left: {fileID: 0}
+      Right: {fileID: 0}
+      Forward: {fileID: 0}
+      Back: {fileID: 0}
+  - TextureName: Stone
+    XTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    YTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    ZTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    SpecificFaceTextures:
+      Up: {fileID: 0}
+      Down: {fileID: 0}
+      Left: {fileID: 0}
+      Right: {fileID: 0}
+      Forward: {fileID: 0}
+      Back: {fileID: 0}
+  - TextureName: Bedrock
+    XTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    YTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    ZTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    SpecificFaceTextures:
+      Up: {fileID: 0}
+      Down: {fileID: 0}
+      Left: {fileID: 0}
+      Right: {fileID: 0}
+      Forward: {fileID: 0}
+      Back: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,13 +359,14 @@ GameObject:
   m_Component:
   - component: {fileID: 385497911}
   - component: {fileID: 385497913}
+  - component: {fileID: 385497914}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &385497911
 Transform:
   m_ObjectHideFlags: 0
@@ -335,10 +395,90 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5b94b68f709f444b5055f6be31f562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TextureLoaderInstance: {fileID: 385497914}
   solidThreshold: 0.2
   BlocksPerChunk: 16
-  meshMaterial: {fileID: 2100000, guid: ec235ca72744fde408f67ded8bda893b, type: 2}
+  meshMaterial: {fileID: 2100000, guid: d661fb3c7c012f04688b83befb01039f, type: 2}
   VertecesPerChunk: 0
+--- !u!114 &385497914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385497910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cded704e4c5cb2b4daaade0a6e523466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cubeTextures:
+  - TextureName: Grass
+    xTexture: {fileID: 721555036, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    yTexture: {fileID: 1567968917, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    zTexture: {fileID: 721555036, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    SpecificFaceTextures:
+      Up: {fileID: 0}
+      Down: {fileID: 0}
+      Left: {fileID: 0}
+      Right: {fileID: 0}
+      Forward: {fileID: 0}
+      Back: {fileID: 0}
+  - TextureName: Dirt
+    xTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    yTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    zTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    SpecificFaceTextures:
+      Up: {fileID: 0}
+      Down: {fileID: 0}
+      Left: {fileID: 0}
+      Right: {fileID: 0}
+      Forward: {fileID: 0}
+      Back: {fileID: 0}
+  - TextureName: Stone
+    xTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    yTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    zTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    SpecificFaceTextures:
+      Up: {fileID: 0}
+      Down: {fileID: 0}
+      Left: {fileID: 0}
+      Right: {fileID: 0}
+      Forward: {fileID: 0}
+      Back: {fileID: 0}
+  - TextureName: Sand
+    xTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    yTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    zTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    SpecificFaceTextures:
+      Up: {fileID: 0}
+      Down: {fileID: 0}
+      Left: {fileID: 0}
+      Right: {fileID: 0}
+      Forward: {fileID: 0}
+      Back: {fileID: 0}
+  - TextureName: Wood
+    xTexture: {fileID: -1408112689, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    yTexture: {fileID: -1141543713, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    zTexture: {fileID: -1408112689, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    SpecificFaceTextures:
+      Up: {fileID: 0}
+      Down: {fileID: 0}
+      Left: {fileID: 0}
+      Right: {fileID: 0}
+      Forward: {fileID: 0}
+      Back: {fileID: 0}
+  - TextureName: Leaves
+    xTexture: {fileID: -1030720941, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    yTexture: {fileID: -1030720941, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    zTexture: {fileID: -1030720941, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    SpecificFaceTextures:
+      Up: {fileID: 0}
+      Down: {fileID: 0}
+      Left: {fileID: 0}
+      Right: {fileID: 0}
+      Forward: {fileID: 0}
+      Back: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

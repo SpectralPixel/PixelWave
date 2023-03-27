@@ -7,14 +7,16 @@ public class MeshGenerator
 
     public class FaceData
     {
-        public FaceData(Vector3[] _vertices, int[] _triangles)
+        public FaceData(Vector3[] _vertices, int[] _triangles, int[] _UVIndexOrder)
         {
             Vertices = _vertices;
             Indices = _triangles;
+            UVIndexOrder = _UVIndexOrder;
         }
 
         public Vector3[] Vertices;
         public int[] Indices;
+        public int[] UVIndexOrder;
     }
 
     #region FaceData
@@ -108,39 +110,61 @@ public class MeshGenerator
     };
 
     #endregion
+    #region FaceUVData
+
+    static readonly int[] XUVOrder = new int[]
+    {
+     2, 3, 1, 0
+    };
+
+    static readonly int[] YUVOrder = new int[]
+    {
+      0, 1, 3, 2
+    };
+
+
+    static readonly int[] ZUVOrder = new int[]
+    {
+      3, 1, 0, 2
+    };
+
+
+    #endregion
     #region InitializeCubeFaces
 
     private Dictionary<Vector3Int, FaceData> cubeFaces = new Dictionary<Vector3Int, FaceData>();
+    private TextureLoader textureLoaderInstance;
 
-    public MeshGenerator()
+    public MeshGenerator(TextureLoader _textureLoaderInstance)
     {
         cubeFaces = new Dictionary<Vector3Int, FaceData>();
+        textureLoaderInstance = _textureLoaderInstance;
 
         for (int i = 0; i < CheckDirections.Length; i++)
         {
             if (CheckDirections[i] == Vector3Int.up)
             {
-                cubeFaces.Add(CheckDirections[i], new FaceData(UpFace, UpTris));
+                cubeFaces.Add(CheckDirections[i], new FaceData(UpFace, UpTris, YUVOrder));
             }
             else if (CheckDirections[i] == Vector3Int.down)
             {
-                cubeFaces.Add(CheckDirections[i], new FaceData(DownFace, DownTris));
+                cubeFaces.Add(CheckDirections[i], new FaceData(DownFace, DownTris, YUVOrder));
             }
             else if (CheckDirections[i] == Vector3Int.forward)
             {
-                cubeFaces.Add(CheckDirections[i], new FaceData(ForwardFace, ForwardTris));
+                cubeFaces.Add(CheckDirections[i], new FaceData(ForwardFace, ForwardTris, ZUVOrder));
             }
             else if (CheckDirections[i] == Vector3Int.back)
             {
-                cubeFaces.Add(CheckDirections[i], new FaceData(BackFace, BackTris));
+                cubeFaces.Add(CheckDirections[i], new FaceData(BackFace, BackTris, ZUVOrder));
             }
             else if (CheckDirections[i] == Vector3Int.left)
             {
-                cubeFaces.Add(CheckDirections[i], new FaceData(LeftFace, LeftTris));
+                cubeFaces.Add(CheckDirections[i], new FaceData(LeftFace, LeftTris, XUVOrder));
             }
             else if (CheckDirections[i] == Vector3Int.right)
             {
-                cubeFaces.Add(CheckDirections[i], new FaceData(RightFace, RightTris));
+                cubeFaces.Add(CheckDirections[i], new FaceData(RightFace, RightTris, XUVOrder));
             }
         }
     }
@@ -156,6 +180,7 @@ public class MeshGenerator
 
         List<Vector3> _vertices = new List<Vector3>();
         List<int> _indices = new List<int>();
+        List<Vector2> _UVs = new List<Vector2>();
 
         for (int x = 0; x < _verticesPerChunk; x++) // loops over all dimensions
         {
@@ -163,17 +188,21 @@ public class MeshGenerator
             {
                 for (int z = 0; z < _verticesPerChunk; z++)
                 {
-                    bool _currentBlockIsSolid = _chunk.GetBlock(new Vector3Int(x, y, z)).solid;
+                    Vector3Int _currentBlockPosition = new Vector3Int(x, y, z);
+                    bool _currentBlockIsSolid = _chunk.GetBlock(_currentBlockPosition).IsSolid;
 
                     for (int i = 0; i < CheckDirections.Length; i++)
                     {
-                        bool _checkedBlockIsSolid = _chunk.GetBlock((new Vector3Int(x, y, z) + CheckDirections[i])).solid;
+                        bool _checkedBlockIsSolid = _chunk.GetBlock((_currentBlockPosition + CheckDirections[i])).IsSolid;
                         try
                         {
                             if (!_checkedBlockIsSolid)
                             {
                                 if (_currentBlockIsSolid)
                                 {
+                                    int _currentBlockID = _chunk.GetBlock(_currentBlockPosition).BlockID;
+                                    TextureLoader.CubeTexture _textureToApply = textureLoaderInstance.Textures[_currentBlockID];
+
                                     FaceData _faceToApply = cubeFaces[CheckDirections[i]];
 
                                     foreach (Vector3 _vertice in _faceToApply.Vertices)
@@ -185,6 +214,12 @@ public class MeshGenerator
                                     {
                                         _indices.Add(_vertices.Count - 4 + _triangle);
                                     }
+
+                                    Vector2[] _UVsToAdd = _textureToApply.GetUVsAtDirection(CheckDirections[i]);
+                                    foreach (int _UVIndex in _faceToApply.UVIndexOrder)
+                                    {
+                                        _UVs.Add(_UVsToAdd[_UVIndex]);
+                                    }
                                 }
                             }
                         }
@@ -192,6 +227,9 @@ public class MeshGenerator
                         {
                             if (_currentBlockIsSolid)
                             {
+                                int _currentBlockID = _chunk.GetBlock(_currentBlockPosition).BlockID;
+                                TextureLoader.CubeTexture _textureToApply = textureLoaderInstance.Textures[_currentBlockID];
+
                                 FaceData _faceToApply = cubeFaces[CheckDirections[i]];
 
                                 foreach (Vector3 _vertice in _faceToApply.Vertices)
@@ -202,6 +240,12 @@ public class MeshGenerator
                                 foreach (int _triangle in _faceToApply.Indices)
                                 {
                                     _indices.Add(_vertices.Count - 4 + _triangle);
+                                }
+
+                                Vector2[] _UVsToAdd = _textureToApply.GetUVsAtDirection(CheckDirections[i]);
+                                foreach (int _UVIndex in _faceToApply.UVIndexOrder)
+                                {
+                                    _UVs.Add(_UVsToAdd[_UVIndex]);
                                 }
                             }
                         }
@@ -214,6 +258,8 @@ public class MeshGenerator
 
         _mesh.SetVertices(_vertices);
         _mesh.SetIndices(_indices, MeshTopology.Triangles, 0);
+        _mesh.SetUVs(0, _UVs);
+
         _mesh.RecalculateBounds();
         _mesh.RecalculateTangents();
         _mesh.RecalculateNormals();

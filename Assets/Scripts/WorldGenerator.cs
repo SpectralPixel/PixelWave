@@ -7,6 +7,8 @@ public class WorldGenerator : MonoBehaviour
 
     public static WorldGenerator Instance;
 
+    [SerializeField] private TextureLoader TextureLoaderInstance;
+    [Space]
     [SerializeField] private float solidThreshold;
     public int BlocksPerChunk; // 16
     [Space]
@@ -39,7 +41,7 @@ public class WorldGenerator : MonoBehaviour
                 for (int x = 0; x <= _blocksPerChunk; x++)
                 {
                     float _randomNumber = Random.Range(0.0f, 1.0f);
-                    _newChunkData[x, y, z] = new Block((_randomNumber < solidThreshold ? 1 : 0), new Vector3Int(x, y, z));
+                    _newChunkData[x, y, z] = new Block((_randomNumber < solidThreshold ? Random.Range(1, 7) : 0), new Vector3Int(x, y, z));
                 }
             }
         }
@@ -52,7 +54,7 @@ public class WorldGenerator : MonoBehaviour
         MeshRenderer _meshRenderer = _meshObject.AddComponent<MeshRenderer>();
         _meshObject.transform.SetParent(gameObject.transform);
 
-        _meshFilter.mesh = new MeshGenerator().CreateNewMesh(_newChunk);
+        _meshFilter.mesh = new MeshGenerator(TextureLoaderInstance).CreateNewMesh(_newChunk);
         _meshRenderer.material = meshMaterial;
     }
 }
