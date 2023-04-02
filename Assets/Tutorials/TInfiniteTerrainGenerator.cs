@@ -33,7 +33,10 @@ public class TInfiniteTerrainGenerator : MonoBehaviour
             for (int y = _playerChunkZ - renderDistance; y <= _playerChunkZ + renderDistance; y++)
             {
                 Vector2Int _chunkCoord = new Vector2Int(x, y);
-                if (!TWorldGenerator.ActiveChunks.ContainsKey(_chunkCoord)) GeneratorInstance.CreateChunk(_chunkCoord);
+                if (!TWorldGenerator.ActiveChunks.ContainsKey(_chunkCoord))
+                {
+                    StartCoroutine(GeneratorInstance.CreateChunk(_chunkCoord));
+                }
 
                 CoordsToRemove.Remove(_chunkCoord);
             }

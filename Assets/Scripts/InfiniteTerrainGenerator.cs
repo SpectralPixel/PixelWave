@@ -7,10 +7,12 @@ public class InfiniteTerrainGenerator : MonoBehaviour
 
     [SerializeField] private Transform player;
     [SerializeField] private int renderDistance;
+    private WorldGenerator GeneratorInstance;
     private List<Vector3Int> CoordsToRemove;
 
     void Start()
     {
+        GeneratorInstance = GetComponent<WorldGenerator>();
         CoordsToRemove = new List<Vector3Int>();
     }
 
@@ -33,10 +35,13 @@ public class InfiniteTerrainGenerator : MonoBehaviour
             {
                 for (int z = _playerChunkZ - renderDistance; z <= _playerChunkZ + renderDistance; z++)
                 {
-                    Vector3Int _chunkCoord = new Vector3Int(x, y, z);
-                    if (!WorldGenerator.ActiveChunks.ContainsKey(_chunkCoord)) WorldGenerator.Instance.CreateNewWorldChunk(_chunkCoord);
+                    Vector3Int _chunkCoordinate = new Vector3Int(x, y, z);
+                    if (!WorldGenerator.ActiveChunks.ContainsKey(_chunkCoordinate))
+                    {
+                        StartCoroutine(GeneratorInstance.CreateNewWorldChunk(_chunkCoordinate));
+                    }
 
-                    CoordsToRemove.Remove(_chunkCoord);
+                    CoordsToRemove.Remove(_chunkCoordinate);
                 }
             }
         }

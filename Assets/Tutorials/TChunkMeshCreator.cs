@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -158,7 +160,7 @@ public class TChunkMeshCreator
         }
     }
 
-    public Mesh CreateMeshFromData(int[,,] _data)
+    public IEnumerator CreateMeshFromData(int[,,] _data, Action<Mesh> _callback)
     {
         List<Vector3> _vertices = new List<Vector3>();
         List<int> _indices = new List<int>();
@@ -166,20 +168,49 @@ public class TChunkMeshCreator
 
         Mesh _mesh = new Mesh();
 
-        for (int x = 0; x < TWorldGenerator.ChunkSize.x; x++) // loops over all dimensions
+        Task _task = Task.Factory.StartNew(delegate
         {
-            for (int y = 0; y < TWorldGenerator.ChunkSize.y; y++)
+            for (int x = 0; x < TWorldGenerator.ChunkSize.x; x++) // loops over all dimensions
             {
-                for (int z = 0; z < TWorldGenerator.ChunkSize.z; z++)
+                for (int y = 0; y < TWorldGenerator.ChunkSize.y; y++)
                 {
-                    Vector3Int _blockPos = new Vector3Int(x, y, z);
-
-                    for (int i = 0; i < CheckDirections.Length; i++)
+                    for (int z = 0; z < TWorldGenerator.ChunkSize.z; z++)
                     {
-                        Vector3Int _blockToCheck = _blockPos + CheckDirections[i];
-                        try
+                        Vector3Int _blockPos = new Vector3Int(x, y, z);
+
+                        for (int i = 0; i < CheckDirections.Length; i++)
                         {
-                            if (_data[_blockToCheck.x, _blockToCheck.y, _blockToCheck.z] == 0)
+                            Vector3Int _blockToCheck = _blockPos + CheckDirections[i];
+                            try
+                            {
+                                if (_data[_blockToCheck.x, _blockToCheck.y, _blockToCheck.z] == 0)
+                                {
+                                    if (_data[_blockPos.x, _blockPos.y, _blockPos.z] != 0)
+                                    {
+                                        int _currentBlockID = _data[_blockPos.x, _blockPos.y, _blockPos.z];
+                                        TTextureLoader.TCubeTexture _textureToApply = TextureLoaderInstance.Textures[_currentBlockID];
+
+                                        TFaceData _faceToApply = CubeFaces[CheckDirections[i]];
+
+                                        foreach (Vector3 _vertice in _faceToApply.Vertices)
+                                        {
+                                            _vertices.Add(new Vector3(x, y, z) + _vertice);
+                                        }
+
+                                        foreach (int _triangle in _faceToApply.Indices)
+                                        {
+                                            _indices.Add(_vertices.Count - 4 + _triangle);
+                                        }
+
+                                        Vector2[] _UVsToAdd = _textureToApply.GetUVsAtDirectionT(CheckDirections[i]);
+                                        foreach (int _UVIndex in _faceToApply.UVIndexOrder)
+                                        {
+                                            _UVs.Add(_UVsToAdd[_UVIndex]);
+                                        }
+                                    }
+                                }
+                            }
+                            catch (System.Exception e)
                             {
                                 if (_data[_blockPos.x, _blockPos.y, _blockPos.z] != 0)
                                 {
@@ -198,7 +229,7 @@ public class TChunkMeshCreator
                                         _indices.Add(_vertices.Count - 4 + _triangle);
                                     }
 
-                                    Vector2[] _UVsToAdd = _textureToApply.GetUVsAtDirection(CheckDirections[i]);
+                                    Vector2[] _UVsToAdd = _textureToApply.GetUVsAtDirectionT(CheckDirections[i]);
                                     foreach (int _UVIndex in _faceToApply.UVIndexOrder)
                                     {
                                         _UVs.Add(_UVsToAdd[_UVIndex]);
@@ -206,36 +237,17 @@ public class TChunkMeshCreator
                                 }
                             }
                         }
-                        catch (System.Exception e)
-                        {
-                            if (_data[_blockPos.x, _blockPos.y, _blockPos.z] != 0)
-                            {
-                                int _currentBlockID = _data[_blockPos.x, _blockPos.y, _blockPos.z];
-                                TTextureLoader.TCubeTexture _textureToApply = TextureLoaderInstance.Textures[_currentBlockID];
-
-                                TFaceData _faceToApply = CubeFaces[CheckDirections[i]];
-
-                                foreach (Vector3 _vertice in _faceToApply.Vertices)
-                                {
-                                    _vertices.Add(new Vector3(x, y, z) + _vertice);
-                                }
-
-                                foreach (int _triangle in _faceToApply.Indices)
-                                {
-                                    _indices.Add(_vertices.Count - 4 + _triangle);
-                                }
-
-                                Vector2[] _UVsToAdd = _textureToApply.GetUVsAtDirection(CheckDirections[i]);
-                                foreach (int _UVIndex in _faceToApply.UVIndexOrder)
-                                {
-                                    _UVs.Add(_UVsToAdd[_UVIndex]);
-                                }
-                            }
-                        }
                     }
                 }
             }
-        }
+        });
+
+        yield return new WaitUntil(() =>
+        {
+            return _task.IsCompleted;
+        });
+
+        if (_task.Exception != null) Debug.LogError(_task.Exception);
 
         _mesh.SetVertices(_vertices);
         _mesh.SetIndices(_indices, MeshTopology.Triangles, 0);
@@ -245,7 +257,7 @@ public class TChunkMeshCreator
         _mesh.RecalculateTangents();
         _mesh.RecalculateNormals();
 
-        return _mesh;
+        _callback(_mesh);
 
     }
 
