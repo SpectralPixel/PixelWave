@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst;
 using UnityEngine;
 
 public class TWorldGenerator : MonoBehaviour
@@ -10,7 +9,7 @@ public class TWorldGenerator : MonoBehaviour
     public static readonly Vector3Int ChunkSize = new Vector3Int(16, 256, 16);
     [Space]
     [SerializeField] private TTextureLoader TextureLoaderInstance;
-    public Material _meshMaterial;
+    public Material meshMaterial;
     [Space]
     public Vector2 NoiseScale = Vector2.one;
     public Vector2 NoiseOffset = Vector2.zero;
@@ -49,13 +48,12 @@ public class TWorldGenerator : MonoBehaviour
             typeof (MeshCollider)
         });
 
-        ////////////////////////////////////////////// https://youtu.be/Y8LCHU3hi2U?list=PLEvnA6UOOVbkOTaFPe4P0RA3W1mINbWCf&t=321
         MeshRenderer _newChunkRenderer = _newChunk.GetComponent<MeshRenderer>();
         MeshFilter _newChunkFilter = _newChunk.GetComponent<MeshFilter>();
         MeshCollider _newChunkCollider = _newChunk.GetComponent<MeshCollider>();
 
         _newChunk.transform.position = new Vector3(_chunkCoord.x * 16f, 0f, _chunkCoord.y * 16f);
-        _newChunkRenderer.material = _meshMaterial;
+        _newChunkRenderer.material = meshMaterial;
         _newChunkFilter.mesh = meshCreator.CreateMeshFromData(dataToApply);
         _newChunkCollider.sharedMesh = _newChunkFilter.mesh;
         ActiveChunks.Add(_chunkCoord, _newChunk);
