@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &222632576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,7 +382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &385497911
 Transform:
   m_ObjectHideFlags: 0
@@ -413,7 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noiseScale: {x: 1, y: 1}
   noiseOffset: {x: 0, y: 0}
-  heightOffset: 60
+  worldHeight: 60
   heightIntensity: 5
   meshMaterial: {fileID: 2100000, guid: d661fb3c7c012f04688b83befb01039f, type: 2}
   VertecesPerChunk: 0

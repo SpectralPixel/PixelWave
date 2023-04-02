@@ -31,7 +31,7 @@ public class InfiniteTerrainGenerator : MonoBehaviour
         {
             for (int y = _playerChunkY - renderDistance; y <= _playerChunkY + renderDistance; y++)
             {
-                for (int z = _playerChunkZ - renderDistance; z <= _playerChunkZ + renderDistance; y++)
+                for (int z = _playerChunkZ - renderDistance; z <= _playerChunkZ + renderDistance; z++)
                 {
                     Vector3Int _chunkCoord = new Vector3Int(x, y, z);
                     if (!WorldGenerator.ActiveChunks.ContainsKey(_chunkCoord)) WorldGenerator.Instance.CreateNewWorldChunk(_chunkCoord);

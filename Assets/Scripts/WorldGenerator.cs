@@ -13,7 +13,7 @@ public class WorldGenerator : MonoBehaviour
     static readonly public int BlocksPerChunk = 16;
     public Vector2 noiseScale;
     public Vector2 noiseOffset;
-    public int heightOffset;
+    public int worldHeight;
     public float heightIntensity;
     [Space]
     [SerializeField] private Material meshMaterial;
@@ -39,16 +39,16 @@ public class WorldGenerator : MonoBehaviour
 
         VertecesPerChunk = BlocksPerChunk + 1;
 
-        //for (int x = -2; x < 2; x++)
-        //{
+        for (int x = -2; x < 2; x++)
+        {
             for (int y = -2; y < 2; y++)
             {
-                //for (int z = -2; z < 2; z++)
-                //{
-                    CreateNewWorldChunk(new Vector3Int(0, y, 0));
-                //}
+                for (int z = -2; z < 2; z++)
+                {
+                    CreateNewWorldChunk(new Vector3Int(x, y, z));
+                }
             }
-        //}
+        }
     }
 
     public void CreateNewWorldChunk(Vector3Int _chunkCoord)
@@ -62,7 +62,7 @@ public class WorldGenerator : MonoBehaviour
 
         string _newChunkName = $"Chunk {_chunkCoord.x} {_chunkCoord.y} {_chunkCoord.z}";
         GameObject _newChunk = new GameObject(_newChunkName);
-        _newChunk.transform.position = new Vector3(_chunkCoord.x * 16f, 0f, _chunkCoord.y * 16f);
+        _newChunk.transform.position = new Vector3(_chunkCoord.x * 16f, _chunkCoord.y * 16f, _chunkCoord.z * 16f);
 
         MeshFilter _newChunkFilter = _newChunk.AddComponent<MeshFilter>();
         _newChunkFilter.mesh = meshCreator.CreateNewMesh(_newChunkData);
@@ -86,7 +86,7 @@ public class WorldGenerator : MonoBehaviour
             {
                 float _perlinCoordX = noiseOffset.x + (x + (_columnPosition.x * 16f)) / BlocksPerChunk * noiseScale.x; // gets X coordinate for perlin noise function
                 float _perlinCoordZ = noiseOffset.y + (z + (_columnPosition.y * 16f)) / BlocksPerChunk * noiseScale.y;
-                int _groundHeight = Mathf.RoundToInt(Mathf.PerlinNoise(_perlinCoordX, _perlinCoordZ) * heightIntensity + heightOffset); // gets a height to start generating at with perlin noise
+                int _groundHeight = Mathf.RoundToInt(Mathf.PerlinNoise(_perlinCoordX, _perlinCoordZ) * heightIntensity + worldHeight); // gets a height to start generating at with perlin noise
                 _groundHeights[x, z] = _groundHeight;
             }
         }
@@ -106,6 +106,7 @@ public class WorldGenerator : MonoBehaviour
                 for (int z = 0; z <= BlocksPerChunk; z++)
                 {
                     int _groundHeight = LocalToWorldHeight(_groundHeights[x, z], _chunkPosition);
+                    int _minimumHeight = LocalToWorldHeight(-worldHeight, _chunkPosition);
                     int _blockTypeToAssign = 0;
 
                     // create grass if at the top layer
@@ -115,10 +116,10 @@ public class WorldGenerator : MonoBehaviour
                     if (y < _groundHeight && y > _groundHeight - 4) _blockTypeToAssign = 2;
 
                     // everything between dirt range (inclusive) and and 0 (exclusive) is stone
-                    if (y <= _groundHeight - 4 && y > 0) _blockTypeToAssign = 3;
+                    if (y <= _groundHeight - 4 && y > _minimumHeight) _blockTypeToAssign = 3;
 
                     // height 0 is bedrock
-                    if (y == 0) _blockTypeToAssign = 4;
+                    if (y == _minimumHeight) _blockTypeToAssign = 4;
 
                     _newChunkData[x, y, z] = new Block(_blockTypeToAssign, new Vector3Int(x, y, z));
                     if (y > BlocksPerChunk) _newChunkData[x, y, z] = new Block(_blockTypeToAssign, new Vector3Int(x, y, z));
@@ -141,12 +142,7 @@ public class WorldGenerator : MonoBehaviour
 
     int LocalToWorldHeight(int _localHeight, Vector3Int _chunkPosition)
     {
-        int _globalHeight = (_chunkPosition.y * BlocksPerChunk) + _localHeight;
+        int _globalHeight = (-_chunkPosition.y * BlocksPerChunk) + _localHeight;
         return _globalHeight;
-    }
-
-    private void OnDrawGizmos()
-    {
-        
     }
 }
