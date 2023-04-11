@@ -8,6 +8,12 @@ using UnityEngine.Playables;
 public class TChunkMeshCreator
 {
 
+    public class CreateMesh
+    {
+        public int[,,] DataToDraw;
+        public System.Action<Mesh> OnComplete;
+    }
+
     public class TFaceData
     {
         public TFaceData(Vector3[] _vertices, int[] _triangles, int[] _UVIndexOrder)
@@ -136,11 +142,17 @@ public class TChunkMeshCreator
 
     private Dictionary<Vector3Int, TFaceData> CubeFaces = new Dictionary<Vector3Int, TFaceData>();
     private TTextureLoader TextureLoaderInstance;
+    private TWorldGenerator generator;
+    private Queue<CreateMesh> meshesToCreate;
+    private int chunkMeshesGenerating = 0;
+    public bool Terminate;
 
-    public TChunkMeshCreator(TTextureLoader _textureLoaderInstance)
+    public TChunkMeshCreator(TTextureLoader _textureLoaderInstance, TWorldGenerator _worldGenerator)
     {
         CubeFaces = new Dictionary<Vector3Int, TFaceData>();
         TextureLoaderInstance = _textureLoaderInstance;
+        meshesToCreate = new Queue<CreateMesh>();
+        generator = _worldGenerator;
 
         for (int i = 0; i < CheckDirections.Length; i++)
         {
@@ -158,9 +170,36 @@ public class TChunkMeshCreator
                 CubeFaces.Add(CheckDirections[i], new TFaceData(RightFace, RightTris, XUVOrder));
             }
         }
+
+        generator.StartCoroutine(MeshGenLoop());
     }
 
-    public IEnumerator CreateMeshFromData(int[,,] _data, Action<Mesh> _callback)
+
+    public void QueueDataToDraw(CreateMesh createMeshData)
+    {
+        meshesToCreate.Enqueue(createMeshData);
+    }
+
+    public IEnumerator MeshGenLoop()
+    {
+        while (!Terminate)
+        {
+            if (meshesToCreate.Count > 0 && chunkMeshesGenerating < 2)
+            {
+                CreateMesh createMesh = meshesToCreate.Dequeue(); // gets the mesh at the beginning of the queue and removes it from the queue
+
+                generator.StartCoroutine(CreateMeshFromData(createMesh.DataToDraw, createMesh.OnComplete));
+                chunkMeshesGenerating++;
+                yield return new WaitUntil(() => createMesh.OnComplete != null);
+                chunkMeshesGenerating--;
+            }
+
+            yield return null;
+        }
+    }
+
+
+    public IEnumerator CreateMeshFromData(int[,,] _data, Action<Mesh> _meshCallback)
     {
         List<Vector3> _vertices = new List<Vector3>();
         List<int> _indices = new List<int>();
@@ -257,7 +296,7 @@ public class TChunkMeshCreator
         _mesh.RecalculateTangents();
         _mesh.RecalculateNormals();
 
-        _callback(_mesh);
+        _meshCallback(_mesh);
 
     }
 

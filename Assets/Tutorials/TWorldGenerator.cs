@@ -19,13 +19,15 @@ public class TWorldGenerator : MonoBehaviour
     public float HeightIntensity = 5;
 
     private TChunkMeshCreator meshCreator;
+    private TChunkDataGenerator chunkDataGenerator;
 
     void Start()
     {
         WorldData = new Dictionary<Vector3Int, int[,,]>();
         ActiveChunks = new Dictionary<Vector2Int, GameObject>();
 
-        meshCreator = new TChunkMeshCreator(TextureLoaderInstance);
+        meshCreator = new TChunkMeshCreator(TextureLoaderInstance, this);
+        chunkDataGenerator = new TChunkDataGenerator(this);
     }
 
     public IEnumerator CreateChunk(Vector2Int _chunkCoord)
@@ -43,16 +45,25 @@ public class TWorldGenerator : MonoBehaviour
         _newChunk.transform.position = new Vector3(_chunkCoord.x * 16f, 0f, _chunkCoord.y * 16f);
         ActiveChunks.Add(_chunkCoord, _newChunk);
         
-        int[,,] dataToApply = WorldData.ContainsKey(_position) ? WorldData[_position] : null;
-        if (dataToApply == null)
-        {
-            StartCoroutine(GenerateData(_position, x => dataToApply = x));
-            yield return new WaitUntil(() => dataToApply != null);
-        }
-
+        int[,,] _dataToApply = WorldData.ContainsKey(_position) ? WorldData[_position] : null;
         Mesh _meshToUse = null;
 
-        StartCoroutine(meshCreator.CreateMeshFromData(dataToApply, x => _meshToUse = x)); // sets _meshToUse to x when x is returned
+        if (_dataToApply == null)
+        {
+            chunkDataGenerator.QueueDataToGenerate(new TChunkDataGenerator.GenData
+            {
+                GenerationPoint = _position,
+                OnComplete = x => _dataToApply = x // sets _dataToApply to x when x is returned
+            });
+
+            yield return new WaitUntil(() => _dataToApply != null);
+        }
+
+        meshCreator.QueueDataToDraw(new TChunkMeshCreator.CreateMesh
+        {
+            DataToDraw = _dataToApply,
+            OnComplete = x => _meshToUse = x
+        });
         yield return new WaitUntil(() => _meshToUse != null); // waits until _meshToUse is not null before excecuting following code (aka waits until mesh has been generated)
 
         if (_newChunk != null)
@@ -66,52 +77,4 @@ public class TWorldGenerator : MonoBehaviour
             _newChunkCollider.sharedMesh = _newChunkFilter.mesh;
         }
     }
-
-    public IEnumerator GenerateData(Vector3Int _offset, System.Action<int[,,]> _callback)
-    {
-        int[,,] _tempData = new int[ChunkSize.x, ChunkSize.y, ChunkSize.z]; //int[,,] is a 3 dimensional int array
-
-        Task _task = Task.Factory.StartNew(delegate
-        {
-            for (int x = 0; x < ChunkSize.x; x++)
-            {
-                for (int z = 0; z < ChunkSize.z; z++)
-                {
-                    float PerlinCoordX = NoiseOffset.x + (x + (_offset.x * 16f)) / (float)ChunkSize.x * NoiseScale.x;
-                    float PerlinCoordY = NoiseOffset.y + (z + (_offset.z * 16f)) / (float)ChunkSize.z * NoiseScale.y;
-                    int HeightGen = Mathf.RoundToInt(Mathf.PerlinNoise(PerlinCoordX, PerlinCoordY) * HeightIntensity + HeightOffset);
-
-                    for (int y = HeightGen; y >= 0; y--)
-                    {
-                        int _blockTypeToAssign = 0;
-
-                        // create grass
-                        if (y == HeightGen) _blockTypeToAssign = 1;
-
-                        // next 3 blocks dirt
-                        if (y < HeightGen && y > HeightGen - 4) _blockTypeToAssign = 2;
-
-                        // everything between dirt range (inclusive) and and 0 (exclusive) is stone
-                        if (y <= HeightGen - 4 && y > 0) _blockTypeToAssign = 3;
-
-                        // height 0 is bedrock
-                        if (y == 0) _blockTypeToAssign = 4;
-
-                        _tempData[x, y, z] = _blockTypeToAssign;
-                    }
-                }
-            }
-        });
-
-        yield return new WaitUntil(() =>
-        {
-            return _task.IsCompleted;
-        });
-
-        if (_task.Exception != null) Debug.LogError(_task.Exception);
-
-        WorldData.Add(_offset, _tempData);
-        _callback(_tempData);
-    }
-
 }
