@@ -469,9 +469,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeTextures:
   - TextureName: Grass
-    xTexture: {fileID: 721555036, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    yTexture: {fileID: 1567968917, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    zTexture: {fileID: 721555036, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    YTexture: {fileID: 721555036, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    ZTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTextureT: []
+    YTextureT: []
+    ZTextureT: []
     SpecificFaceTextures:
       Up: {fileID: 0}
       Down: {fileID: 0}
@@ -479,10 +482,19 @@ MonoBehaviour:
       Right: {fileID: 0}
       Forward: {fileID: 0}
       Back: {fileID: 0}
+      UpT: []
+      DownT: []
+      LeftT: []
+      RightT: []
+      ForwardT: []
+      BackT: []
   - TextureName: Dirt
-    xTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    yTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    zTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    YTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    ZTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTextureT: []
+    YTextureT: []
+    ZTextureT: []
     SpecificFaceTextures:
       Up: {fileID: 0}
       Down: {fileID: 0}
@@ -490,10 +502,19 @@ MonoBehaviour:
       Right: {fileID: 0}
       Forward: {fileID: 0}
       Back: {fileID: 0}
+      UpT: []
+      DownT: []
+      LeftT: []
+      RightT: []
+      ForwardT: []
+      BackT: []
   - TextureName: Stone
-    xTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    yTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    zTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    YTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    ZTexture: {fileID: -1240810697, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTextureT: []
+    YTextureT: []
+    ZTextureT: []
     SpecificFaceTextures:
       Up: {fileID: 0}
       Down: {fileID: 0}
@@ -501,10 +522,19 @@ MonoBehaviour:
       Right: {fileID: 0}
       Forward: {fileID: 0}
       Back: {fileID: 0}
+      UpT: []
+      DownT: []
+      LeftT: []
+      RightT: []
+      ForwardT: []
+      BackT: []
   - TextureName: Sand
-    xTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    yTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    zTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    YTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    ZTexture: {fileID: 1394850726, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTextureT: []
+    YTextureT: []
+    ZTextureT: []
     SpecificFaceTextures:
       Up: {fileID: 0}
       Down: {fileID: 0}
@@ -512,10 +542,19 @@ MonoBehaviour:
       Right: {fileID: 0}
       Forward: {fileID: 0}
       Back: {fileID: 0}
+      UpT: []
+      DownT: []
+      LeftT: []
+      RightT: []
+      ForwardT: []
+      BackT: []
   - TextureName: Wood
-    xTexture: {fileID: -1408112689, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    yTexture: {fileID: -1141543713, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    zTexture: {fileID: -1408112689, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTexture: {fileID: -1408112689, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    YTexture: {fileID: -1141543713, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    ZTexture: {fileID: -1408112689, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTextureT: []
+    YTextureT: []
+    ZTextureT: []
     SpecificFaceTextures:
       Up: {fileID: 0}
       Down: {fileID: 0}
@@ -523,10 +562,19 @@ MonoBehaviour:
       Right: {fileID: 0}
       Forward: {fileID: 0}
       Back: {fileID: 0}
+      UpT: []
+      DownT: []
+      LeftT: []
+      RightT: []
+      ForwardT: []
+      BackT: []
   - TextureName: Leaves
-    xTexture: {fileID: -1030720941, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    yTexture: {fileID: -1030720941, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    zTexture: {fileID: -1030720941, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTexture: {fileID: -1030720941, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    YTexture: {fileID: -1030720941, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    ZTexture: {fileID: -1030720941, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTextureT: []
+    YTextureT: []
+    ZTextureT: []
     SpecificFaceTextures:
       Up: {fileID: 0}
       Down: {fileID: 0}
@@ -534,6 +582,12 @@ MonoBehaviour:
       Right: {fileID: 0}
       Forward: {fileID: 0}
       Back: {fileID: 0}
+      UpT: []
+      DownT: []
+      LeftT: []
+      RightT: []
+      ForwardT: []
+      BackT: []
 --- !u!114 &385497915
 MonoBehaviour:
   m_ObjectHideFlags: 0

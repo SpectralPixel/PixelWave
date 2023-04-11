@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MeshGenerator
@@ -171,7 +173,7 @@ public class MeshGenerator
 
     #endregion
 
-    public Mesh CreateNewMesh(WorldChunk _chunk)
+    public IEnumerator CreateNewMesh(WorldChunk _chunk, Action<Mesh> _callback)
     {
         Mesh _mesh = new Mesh();
 
@@ -182,21 +184,50 @@ public class MeshGenerator
         List<int> _indices = new List<int>();
         List<Vector2> _UVs = new List<Vector2>();
 
-        for (int x = 0; x < _verticesPerChunk; x++) // loops over all dimensions
+        Task _task = Task.Factory.StartNew(delegate
         {
-            for (int y = 0; y < _verticesPerChunk; y++)
+            for (int x = 0; x < _verticesPerChunk; x++) // loops over all dimensions
             {
-                for (int z = 0; z < _verticesPerChunk; z++)
+                for (int y = 0; y < _verticesPerChunk; y++)
                 {
-                    Vector3Int _currentBlockPosition = new Vector3Int(x, y, z);
-                    bool _currentBlockIsSolid = _chunk.GetBlock(_currentBlockPosition).IsSolid;
-
-                    for (int i = 0; i < CheckDirections.Length; i++)
+                    for (int z = 0; z < _verticesPerChunk; z++)
                     {
-                        bool _checkedBlockIsSolid = _chunk.GetBlock((_currentBlockPosition + CheckDirections[i])).IsSolid;
-                        try
+                        Vector3Int _currentBlockPosition = new Vector3Int(x, y, z);
+                        bool _currentBlockIsSolid = _chunk.GetBlock(_currentBlockPosition).IsSolid;
+
+                        for (int i = 0; i < CheckDirections.Length; i++)
                         {
-                            if (!_checkedBlockIsSolid)
+                            bool _checkedBlockIsSolid = _chunk.GetBlock((_currentBlockPosition + CheckDirections[i])).IsSolid;
+                            try
+                            {
+                                if (!_checkedBlockIsSolid)
+                                {
+                                    if (_currentBlockIsSolid)
+                                    {
+                                        int _currentBlockID = _chunk.GetBlock(_currentBlockPosition).BlockID;
+                                        TextureLoader.CubeTexture _textureToApply = textureLoaderInstance.Textures[_currentBlockID];
+
+                                        FaceData _faceToApply = cubeFaces[CheckDirections[i]];
+
+                                        foreach (Vector3 _vertex in _faceToApply.Vertices)
+                                        {
+                                            _vertices.Add(new Vector3(x, y, z) + _vertex);
+                                        }
+
+                                        foreach (int _triangle in _faceToApply.Indices)
+                                        {
+                                            _indices.Add(_vertices.Count - 4 + _triangle);
+                                        }
+
+                                        Vector2[] _UVsToAdd = _textureToApply.GetUVsAtDirectionT(CheckDirections[i]);
+                                        foreach (int _UVIndex in _faceToApply.UVIndexOrder)
+                                        {
+                                            _UVs.Add(_UVsToAdd[_UVIndex]);
+                                        }
+                                    }
+                                }
+                            }
+                            catch (System.Exception e)
                             {
                                 if (_currentBlockIsSolid)
                                 {
@@ -215,7 +246,7 @@ public class MeshGenerator
                                         _indices.Add(_vertices.Count - 4 + _triangle);
                                     }
 
-                                    Vector2[] _UVsToAdd = _textureToApply.GetUVsAtDirection(CheckDirections[i]);
+                                    Vector2[] _UVsToAdd = _textureToApply.GetUVsAtDirectionT(CheckDirections[i]);
                                     foreach (int _UVIndex in _faceToApply.UVIndexOrder)
                                     {
                                         _UVs.Add(_UVsToAdd[_UVIndex]);
@@ -223,36 +254,17 @@ public class MeshGenerator
                                 }
                             }
                         }
-                        catch (System.Exception e)
-                        {
-                            if (_currentBlockIsSolid)
-                            {
-                                int _currentBlockID = _chunk.GetBlock(_currentBlockPosition).BlockID;
-                                TextureLoader.CubeTexture _textureToApply = textureLoaderInstance.Textures[_currentBlockID];
-
-                                FaceData _faceToApply = cubeFaces[CheckDirections[i]];
-
-                                foreach (Vector3 _vertice in _faceToApply.Vertices)
-                                {
-                                    _vertices.Add(new Vector3(x, y, z) + _vertice);
-                                }
-
-                                foreach (int _triangle in _faceToApply.Indices)
-                                {
-                                    _indices.Add(_vertices.Count - 4 + _triangle);
-                                }
-
-                                Vector2[] _UVsToAdd = _textureToApply.GetUVsAtDirection(CheckDirections[i]);
-                                foreach (int _UVIndex in _faceToApply.UVIndexOrder)
-                                {
-                                    _UVs.Add(_UVsToAdd[_UVIndex]);
-                                }
-                            }
-                        }
                     }
                 }
             }
-        }
+        });
+
+        yield return new WaitUntil(() =>
+        {
+            return _task.IsCompleted;
+        });
+
+        if (_task.Exception != null) Debug.LogError(_task.Exception);
 
         _mesh.Clear();
 
@@ -265,6 +277,6 @@ public class MeshGenerator
         _mesh.RecalculateNormals();
         //_mesh.Optimize();
 
-        return _mesh;
+        _callback(_mesh);
     }
 }

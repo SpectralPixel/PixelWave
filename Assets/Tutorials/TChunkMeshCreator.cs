@@ -192,9 +192,9 @@ public class TChunkMeshCreator
 
                                         TFaceData _faceToApply = CubeFaces[CheckDirections[i]];
 
-                                        foreach (Vector3 _vertice in _faceToApply.Vertices)
+                                        foreach (Vector3 _vertex in _faceToApply.Vertices)
                                         {
-                                            _vertices.Add(new Vector3(x, y, z) + _vertice);
+                                            _vertices.Add(new Vector3(x, y, z) + _vertex);
                                         }
 
                                         foreach (int _triangle in _faceToApply.Indices)
