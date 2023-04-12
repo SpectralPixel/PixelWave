@@ -7,6 +7,12 @@ using UnityEngine;
 public class MeshGenerator
 {
 
+    public class CreateMesh
+    {
+        public WorldChunk DataToDraw;
+        public System.Action<Mesh> OnComplete;
+    }
+
     public class FaceData
     {
         public FaceData(Vector3[] _vertices, int[] _triangles, int[] _UVIndexOrder)
@@ -130,17 +136,23 @@ public class MeshGenerator
       3, 1, 0, 2
     };
 
-
     #endregion
-    #region InitializeCubeFaces
 
     private Dictionary<Vector3Int, FaceData> cubeFaces = new Dictionary<Vector3Int, FaceData>();
     private TextureLoader textureLoaderInstance;
+    private WorldGenerator generatorInstance;
+    private Queue<CreateMesh> meshesToCreate;
+    private int chunkMeshesGenerating = 0;
+    private int parallelGenerationCap;
+    public bool Terminate;
 
-    public MeshGenerator(TextureLoader _textureLoaderInstance)
+    public MeshGenerator(TextureLoader _textureLoaderInstance, WorldGenerator _worldGenerator)
     {
         cubeFaces = new Dictionary<Vector3Int, FaceData>();
         textureLoaderInstance = _textureLoaderInstance;
+        meshesToCreate = new Queue<CreateMesh>();
+        generatorInstance = _worldGenerator;
+        parallelGenerationCap = generatorInstance.ParallelGenerationCap;
 
         for (int i = 0; i < CheckDirections.Length; i++)
         {
@@ -169,9 +181,33 @@ public class MeshGenerator
                 cubeFaces.Add(CheckDirections[i], new FaceData(RightFace, RightTris, XUVOrder));
             }
         }
+
+        generatorInstance.StartCoroutine(MeshGenLoop());
     }
 
-    #endregion
+
+    public void QueueDataToDraw(CreateMesh createMeshData)
+    {
+        meshesToCreate.Enqueue(createMeshData);
+    }
+
+    public IEnumerator MeshGenLoop()
+    {
+        while (!Terminate)
+        {
+            if (meshesToCreate.Count > 0 && chunkMeshesGenerating < parallelGenerationCap)
+            {
+                CreateMesh createMesh = meshesToCreate.Dequeue(); // gets the mesh at the beginning of the queue and removes it from the queue
+
+                generatorInstance.StartCoroutine(CreateNewMesh(createMesh.DataToDraw, createMesh.OnComplete));
+                chunkMeshesGenerating++;
+                yield return new WaitUntil(() => createMesh.OnComplete != null);
+                chunkMeshesGenerating--;
+            }
+
+            yield return null;
+        }
+    }
 
     public IEnumerator CreateNewMesh(WorldChunk _chunk, Action<Mesh> _callback)
     {

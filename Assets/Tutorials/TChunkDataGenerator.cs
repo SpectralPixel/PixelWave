@@ -2,31 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using static TChunkMeshCreator;
 
 public class TChunkDataGenerator
 {
 
-    public class GenData
+    public class TGenData
     {
         public System.Action<int[,,]> OnComplete;
         public Vector3Int GenerationPoint;
     }
 
     private TWorldGenerator generatorInstance;
-    private Queue<GenData> dataToGenerate;
+    private Queue<TGenData> dataToGenerate;
     private int chunkMeshesGenerating = 0;
     public bool Terminate;
 
     public TChunkDataGenerator(TWorldGenerator _worldGenerator)
     {
         generatorInstance = _worldGenerator;
-        dataToGenerate = new Queue<GenData>();
+        dataToGenerate = new Queue<TGenData>();
 
         _worldGenerator.StartCoroutine(DataGenLoop());
     }
 
-    public void QueueDataToGenerate(GenData data)
+    public void QueueDataToGenerate(TGenData data)
     {
         dataToGenerate.Enqueue(data);
     }
@@ -37,7 +36,7 @@ public class TChunkDataGenerator
         {
             if (dataToGenerate.Count > 0 && chunkMeshesGenerating < 2)
             {
-                GenData data = dataToGenerate.Dequeue();
+                TGenData data = dataToGenerate.Dequeue();
                 generatorInstance.StartCoroutine(GenerateData(data.GenerationPoint, data.OnComplete));
                 chunkMeshesGenerating++;
                 yield return new WaitUntil(() => data.OnComplete != null);

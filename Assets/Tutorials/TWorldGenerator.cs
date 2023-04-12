@@ -50,7 +50,7 @@ public class TWorldGenerator : MonoBehaviour
 
         if (_dataToApply == null)
         {
-            chunkDataGenerator.QueueDataToGenerate(new TChunkDataGenerator.GenData
+            chunkDataGenerator.QueueDataToGenerate(new TChunkDataGenerator.TGenData
             {
                 GenerationPoint = _position,
                 OnComplete = x => _dataToApply = x // sets _dataToApply to x when x is returned
