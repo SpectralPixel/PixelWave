@@ -29,11 +29,12 @@ public class InfiniteTerrainGenerator : MonoBehaviour
             CoordsToRemove.Add(_activeChunk.Key);
         }
 
-        for (int x = _playerChunkX - renderDistance; x <= _playerChunkX + renderDistance; x++)
+        for (int y = _playerChunkY + renderDistance; y >= _playerChunkY - renderDistance; y--)
         {
-            for (int y = _playerChunkY - renderDistance; y <= _playerChunkY + renderDistance; y++)
+            
+            for (int z = _playerChunkZ - renderDistance; z <= _playerChunkZ + renderDistance; z++)
             {
-                for (int z = _playerChunkZ - renderDistance; z <= _playerChunkZ + renderDistance; z++)
+                for (int x = _playerChunkX - renderDistance; x <= _playerChunkX + renderDistance; x++)
                 {
                     Vector3Int _chunkCoord = new Vector3Int(x, y, z);
                     if (!WorldGenerator.ActiveChunks.ContainsKey(_chunkCoord))

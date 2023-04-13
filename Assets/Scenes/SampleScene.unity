@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 3cbdebf8a6f98a44286468d6a95aecc3,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -359,14 +360,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -30, y: 30, z: -30}
-  m_LocalScale: {x: 0.2, y: 0.19999999, z: 0.19999999}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: -0.13651763, y: 0.8630925, z: -0.32958293, w: -0.3575044}
+  m_LocalPosition: {x: 15.81, y: 10.73, z: 15.81}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1741392521}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 41.8, y: 225, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +392,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 1
+  m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -448,11 +449,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParallelGenerationCap: 8
-  noiseScale: {x: 1, y: 1}
+  noiseScale: {x: 7, y: 7}
   noiseOffset: {x: 0, y: 0}
   terrainOffset: 64
-  worldHeight: 128
-  heightIntensity: 5
+  worldHeight: 256
+  heightIntensity: 50
   meshMaterial: {fileID: 2100000, guid: d661fb3c7c012f04688b83befb01039f, type: 2}
   VertecesPerChunk: 0
   TextureLoaderInstance: {fileID: 385497914}
@@ -470,9 +471,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeTextures:
   - TextureName: Grass
-    XTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    YTexture: {fileID: 721555036, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
-    ZTexture: {fileID: -983111083, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    XTexture: {fileID: 721555036, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    YTexture: {fileID: 1567968917, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
+    ZTexture: {fileID: 721555036, guid: 18932ae0321e35b41bb4bee7a8d84066, type: 3}
     XTextureT: []
     YTextureT: []
     ZTextureT: []
@@ -602,7 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1741392521}
-  renderDistance: 4
+  renderDistance: 2
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,7 +677,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 5000
+  m_ColorTemperature: 15000
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -1083,7 +1084,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741392517}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 60, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1103,4 +1104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e42423658b93c543abfeb1ba8d8455f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: {x: 0, y: 0, z: 0}

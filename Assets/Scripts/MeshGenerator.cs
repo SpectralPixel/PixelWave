@@ -311,6 +311,7 @@ public class MeshGenerator
         _mesh.RecalculateBounds();
         _mesh.RecalculateTangents();
         _mesh.RecalculateNormals();
+        
         //_mesh.Optimize();
 
         _callback(_mesh);

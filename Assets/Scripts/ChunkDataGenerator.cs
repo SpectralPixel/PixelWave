@@ -56,39 +56,62 @@ public class ChunkDataGenerator
         int _verticesPerChunk = _blocksPerChunk + 1;
 
         int _worldHeight = generatorInstance.worldHeight;
+        int _terrainOffset = generatorInstance.terrainOffset;
+        float _heightIntensity = generatorInstance.heightIntensity;
 
         Block[,,] _newChunkData = new Block[_verticesPerChunk, _verticesPerChunk, _verticesPerChunk]; // to the power of 3 because 3-dimensional
 
-        Task _task = Task.Factory.StartNew(delegate
+        Task _task;
+        // if the chunk is above bedrock and below the maximum height terrain can generate
+        if (LocalToWorldHeight(_worldHeight, _chunkPosition, _blocksPerChunk) < _blocksPerChunk && LocalToWorldHeight((int)(_terrainOffset * _heightIntensity + 3f), _chunkPosition, _blocksPerChunk) > 0)
         {
-            for (int x = 0; x <= _blocksPerChunk; x++)
+            _task = Task.Factory.StartNew(delegate
             {
-                for (int y = 0; y <= _blocksPerChunk; y++)
+                for (int x = 0; x <= _blocksPerChunk; x++)
                 {
-                    for (int z = 0; z <= _blocksPerChunk; z++)
+                    for (int y = 0; y <= _blocksPerChunk; y++)
                     {
-                        int _groundHeight = LocalToWorldHeight(_groundHeights[x, z], _chunkPosition, _blocksPerChunk);
-                        int _minimumHeight = LocalToWorldHeight(_worldHeight, _chunkPosition, _blocksPerChunk);
-                        int _blockTypeToAssign = 0;
+                        for (int z = 0; z <= _blocksPerChunk; z++)
+                        {
+                            int _groundHeight = LocalToWorldHeight(_groundHeights[x, z], _chunkPosition, _blocksPerChunk);
+                            int _minimumHeight = LocalToWorldHeight(_worldHeight, _chunkPosition, _blocksPerChunk);
+                            int _blockTypeToAssign = 0;
 
-                        // create grass if at the top layer
-                        if (y == _groundHeight) _blockTypeToAssign = 5;
+                            // create grass if at the top layer
+                            if (y == _groundHeight) _blockTypeToAssign = 1;
 
-                        // next 3 blocks dirt
-                        if (y < _groundHeight && y > _groundHeight - 4) _blockTypeToAssign = 2;
+                            // next 3 blocks dirt
+                            if (y < _groundHeight && y > _groundHeight - 4) _blockTypeToAssign = 2;
 
-                        // everything between dirt range (inclusive) and and 0 (exclusive) is stone
-                        if (y <= _groundHeight - 4 && y > _minimumHeight) _blockTypeToAssign = 3;
+                            // everything between dirt range (inclusive) and and 0 (exclusive) is stone
+                            if (y <= _groundHeight - 4 && y > _minimumHeight) _blockTypeToAssign = 3;
 
-                        // height 0 is bedrock
-                        if (y == _minimumHeight) _blockTypeToAssign = 4;
+                            // height 0 is bedrock
+                            if (y == _minimumHeight) _blockTypeToAssign = 4;
 
-                        _newChunkData[x, y, z] = new Block(_blockTypeToAssign, new Vector3Int(x, y, z));
-                        if (y > _blocksPerChunk) _newChunkData[x, y, z] = new Block(_blockTypeToAssign, new Vector3Int(x, y, z));
+                            _newChunkData[x, y, z] = new Block(_blockTypeToAssign, new Vector3Int(x, y, z));
+                            if (y > _blocksPerChunk) _newChunkData[x, y, z] = new Block(_blockTypeToAssign, new Vector3Int(x, y, z));
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
+        else // if the chunk is below bedrock
+        {
+            _task = Task.Factory.StartNew(delegate
+            {
+                for (int x = 0; x <= _blocksPerChunk; x++)
+                {
+                    for (int y = 0; y <= _blocksPerChunk; y++)
+                    {
+                        for (int z = 0; z <= _blocksPerChunk; z++)
+                        {
+                            _newChunkData[x, y, z] = new Block(0, new Vector3Int(x, y, z)); // automatically set everything to air
+                        }
+                    }
+                }
+            });
+        }
 
         yield return new WaitUntil(() =>
         {
