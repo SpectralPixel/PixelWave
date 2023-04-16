@@ -52,7 +52,6 @@ public class ColumnDataGenerator
     public IEnumerator GenerateColumnData(Vector2Int _columnPosition, System.Action<int[,]> _callback)
     {
         int _blocksPerChunk = WorldGenerator.BlocksPerChunk;
-        int _verticesPerChunk = _blocksPerChunk + 1;
         int _perlinOctaves = 3;
 
         Vector2 noiseOffset = generatorInstance.noiseOffset;
@@ -60,25 +59,26 @@ public class ColumnDataGenerator
         float heightIntensity = generatorInstance.heightIntensity;
         int terrainOffset = generatorInstance.terrainOffset;
 
-        int[,] _groundHeights = new int[_verticesPerChunk, _verticesPerChunk];
+        int[,] _groundHeights = new int[_blocksPerChunk, _blocksPerChunk];
 
         Task _task = Task.Factory.StartNew(delegate
         {
-            for (int x = 0; x <= _blocksPerChunk; x++)
+            for (int x = 0; x < _blocksPerChunk; x++)
             {
-                for (int z = 0; z <= _blocksPerChunk; z++)
+                for (int z = 0; z < _blocksPerChunk; z++)
                 {
                     float _groundHeight = terrainOffset; // gets a height to start generating at with perlin noise
                     for (int octave = 1; octave <= _perlinOctaves; octave++)
                     {
-                        int octave2 = octave * octave;
-                        float _perlinCoordX = ((noiseOffset.x + 10) * octave2) + (x + (_columnPosition.x * _blocksPerChunk)) / (_blocksPerChunk * (noiseScale.x / octave2)); // gets X coordinate for perlin noise function
-                        float _perlinCoordZ = ((noiseOffset.y + 10) * octave2) + (z + (_columnPosition.y * _blocksPerChunk)) / (_blocksPerChunk * (noiseScale.y / octave2));
+                        float _octave2 = octave * octave;
+                        float _perlinCoordX = ((noiseOffset.x + 10) * _octave2) + (x + (_columnPosition.x * _blocksPerChunk)) / (_blocksPerChunk * (noiseScale.x / _octave2)); // gets X coordinate for perlin noise function
+                        float _perlinCoordZ = ((noiseOffset.y + 10) * _octave2) + (z + (_columnPosition.y * _blocksPerChunk)) / (_blocksPerChunk * (noiseScale.y / _octave2));
 
-                        _groundHeight += (Mathf.PerlinNoise(_perlinCoordX, _perlinCoordZ) - 0.5f) * (heightIntensity / octave2);
+                        float _newGroundHeight = (Mathf.PerlinNoise(_perlinCoordX, _perlinCoordZ) - 0.5f) * (heightIntensity / _octave2);
+                        _groundHeight += _newGroundHeight;
                     }
 
-                    Vector2Int _worldPosition = LocalToWorldPosition(new Vector2Int(x, z), _columnPosition, _blocksPerChunk);
+                    Vector2Int _worldPosition = ChunkUtils.LocalToWorldPosition(new Vector2Int(x, z), _columnPosition, _blocksPerChunk);
                     float _distanceToOrigin = Pythagoras(_worldPosition.x, _worldPosition.y);
                     float _heightFalloff = ((_distanceToOrigin * _distanceToOrigin) / 5000) - 50; // use desmos, gives nice visual representation of falloff
                     if (_heightFalloff < 0) _heightFalloff = 0;
@@ -104,12 +104,5 @@ public class ColumnDataGenerator
     float Pythagoras(float a, float b)
     {
         return Mathf.Sqrt(a * a + b * b);
-    }
-
-    Vector2Int LocalToWorldPosition(Vector2Int _localPosition, Vector2Int _chunkPosition, int _chunkSize)
-    {
-        int _globalXPosition = (_chunkPosition.x * _chunkSize) + _localPosition.x;
-        int _globalYPosition = (_chunkPosition.y * _chunkSize) + _localPosition.y;
-        return new Vector2Int(_globalXPosition, _globalYPosition);
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 3}
-  - {fileID: 14}
+  - {fileID: 15}
   m_Position:
     serializedVersion: 2
     x: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 94
+  controlID: 1057
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -34,40 +34,90 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 1
-  m_Script: {fileID: 12019, guid: 0000000000000000e000000000000000, type: 0}
+  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinSize: {x: 275, y: 50}
+  m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Inspector
-    m_Image: {fileID: -440750813802333266, guid: 0000000000000000d000000000000000,
+    m_Text: Game
+    m_Image: {fileID: 4621777727084837110, guid: 0000000000000000d000000000000000,
       type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1155.2001
-    y: 73.6
-    width: 379.80005
-    height: 701.8
+    x: 783.2
+    y: 546.4
+    width: 369.99994
+    height: 229
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
-  m_ObjectsLockedBeforeSerialization:
-  - {fileID: 11400000, guid: 18dc0cd2c080841dea60987a38ce93fa, type: 2}
-  m_InstanceIDsLockedBeforeSerialization: 
-  m_PreviewResizer:
-    m_CachedPref: 160
-    m_ControlHash: -371814159
-    m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
-  m_GlobalObjectId: 
-  m_InspectorMode: 0
-  m_LockTracker:
-    m_IsLocked: 1
-  m_PreviewWindow: {fileID: 0}
+  m_SerializedViewNames: []
+  m_SerializedViewValues: []
+  m_PlayModeViewName: GameView
+  m_ShowGizmos: 0
+  m_TargetDisplay: 0
+  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+  m_TargetSize: {x: 1920, y: 1080}
+  m_TextureFilterMode: 0
+  m_TextureHideFlags: 61
+  m_RenderIMGUI: 1
+  m_EnterPlayModeBehavior: 1
+  m_UseMipMap: 0
+  m_VSyncEnabled: 0
+  m_Gizmos: 0
+  m_Stats: 0
+  m_SelectedSizes: 03000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_ZoomArea:
+    m_HRangeLocked: 0
+    m_VRangeLocked: 0
+    hZoomLockedByDefault: 0
+    vZoomLockedByDefault: 0
+    m_HBaseRangeMin: -768
+    m_HBaseRangeMax: 768
+    m_VBaseRangeMin: -432
+    m_VBaseRangeMax: 432
+    m_HAllowExceedBaseRangeMin: 1
+    m_HAllowExceedBaseRangeMax: 1
+    m_VAllowExceedBaseRangeMin: 1
+    m_VAllowExceedBaseRangeMax: 1
+    m_ScaleWithWindow: 0
+    m_HSlider: 0
+    m_VSlider: 0
+    m_IgnoreScrollWheelUntilClicked: 0
+    m_EnableMouseInput: 1
+    m_EnableSliderZoomHorizontal: 0
+    m_EnableSliderZoomVertical: 0
+    m_UniformScale: 1
+    m_UpDirection: 1
+    m_DrawArea:
+      serializedVersion: 2
+      x: 0
+      y: 21
+      width: 369.99994
+      height: 208
+    m_Scale: {x: 0.24074076, y: 0.24074075}
+    m_Translation: {x: 184.99997, y: 104}
+    m_MarginLeft: 0
+    m_MarginRight: 0
+    m_MarginTop: 0
+    m_MarginBottom: 0
+    m_LastShownAreaInsideMargins:
+      serializedVersion: 2
+      x: -768.46136
+      y: -432
+      width: 1536.9227
+      height: 864
+    m_MinimalGUI: 1
+  m_defaultScale: 0.24074075
+  m_LastWindowPixelSize: {x: 462.49994, y: 286.25}
+  m_ClearInEditMode: 1
+  m_NoCameraWarning: 1
+  m_LowResolutionForAspectRatios: 01000000000000000000
+  m_XRRenderMode: 0
+  m_RenderTexture: {fileID: 0}
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -82,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 4}
-  - {fileID: 10}
+  - {fileID: 9}
   m_Position:
     serializedVersion: 2
     x: 0
@@ -92,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 95
+  controlID: 1058
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -113,11 +163,11 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1155.2
-    height: 478.4
+    height: 472.8
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 96
+  controlID: 63
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,8 +185,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 286.4
-    height: 478.4
+    width: 288
+    height: 472.8
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 6}
@@ -167,8 +217,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73.6
-    width: 285.4
-    height: 457.4
+    width: 287
+    height: 451.8
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -176,9 +226,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 246a0000
-      m_LastClickedID: 27172
-      m_ExpandedIDs: 30fbffff5e6a0000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 2cfbfffff46c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -194,7 +244,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 5}
+        m_ClientGUIView: {fileID: 14}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -212,22 +262,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GameView
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 286.4
+    x: 288
     y: 0
-    width: 868.7999
-    height: 478.4
+    width: 867.19995
+    height: 472.8
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 9}
+  m_ActualView: {fileID: 8}
   m_Panes:
   - {fileID: 8}
-  - {fileID: 9}
-  m_Selected: 1
+  m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -250,10 +299,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 283.2
+    x: 288
     y: 73.6
-    width: 876.39996
-    height: 457.4
+    width: 865.19995
+    height: 451.8
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -350,7 +399,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
-      displayed: 1
+      displayed: 0
       snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -488,9 +537,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 34.419827, y: 81.12201, z: 316.5864}
+    m_Target: {x: 35.498737, y: 81.5317, z: -11.689894}
     speed: 2
-    m_Value: {x: 34.419827, y: 81.12201, z: 316.5864}
+    m_Value: {x: 35.498737, y: 81.5317, z: -11.689894}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -537,13 +586,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.25562197, y: -0.5563197, z: 0.18496862, w: 0.76877874}
+    m_Target: {x: 0.07590033, y: -0.44028383, z: 0.03715361, w: 0.8940187}
     speed: 2
-    m_Value: {x: 0.25561324, y: -0.5563007, z: 0.18496229, w: 0.76875246}
+    m_Value: {x: 0.075890444, y: -0.44022647, z: 0.03714877, w: 0.89390224}
   m_Size:
-    m_Target: 4.3301272
+    m_Target: 0.9049965
     speed: 2
-    m_Value: 4.3301272
+    m_Value: 0.9049965
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -561,7 +610,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0.4252923, y: 0.24242003, z: -0.11934148, w: 0.8637905}
+  m_LastSceneViewRotation: {x: -0.002603198, y: -0.9372639, z: 0.0070320503, w: -0.34864083}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -576,91 +625,23 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Game
-    m_Image: {fileID: 4621777727084837110, guid: 0000000000000000d000000000000000,
-      type: 0}
-    m_Tooltip: 
-  m_Pos:
+  m_Children:
+  - {fileID: 10}
+  - {fileID: 14}
+  m_Position:
     serializedVersion: 2
-    x: 286.4
-    y: 73.6
-    width: 866.7999
-    height: 457.4
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-  m_SerializedViewNames: []
-  m_SerializedViewValues: []
-  m_PlayModeViewName: GameView
-  m_ShowGizmos: 0
-  m_TargetDisplay: 0
-  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 1920, y: 1080}
-  m_TextureFilterMode: 0
-  m_TextureHideFlags: 61
-  m_RenderIMGUI: 1
-  m_EnterPlayModeBehavior: 0
-  m_UseMipMap: 0
-  m_VSyncEnabled: 0
-  m_Gizmos: 0
-  m_Stats: 0
-  m_SelectedSizes: 03000000000000000000000000000000000000000000000000000000000000000000000000000000
-  m_ZoomArea:
-    m_HRangeLocked: 0
-    m_VRangeLocked: 0
-    hZoomLockedByDefault: 0
-    vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -768
-    m_HBaseRangeMax: 768
-    m_VBaseRangeMin: -432
-    m_VBaseRangeMax: 432
-    m_HAllowExceedBaseRangeMin: 1
-    m_HAllowExceedBaseRangeMax: 1
-    m_VAllowExceedBaseRangeMin: 1
-    m_VAllowExceedBaseRangeMax: 1
-    m_ScaleWithWindow: 0
-    m_HSlider: 0
-    m_VSlider: 0
-    m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
-    m_EnableSliderZoomHorizontal: 0
-    m_EnableSliderZoomVertical: 0
-    m_UniformScale: 1
-    m_UpDirection: 1
-    m_DrawArea:
-      serializedVersion: 2
-      x: 0
-      y: 21
-      width: 866.7999
-      height: 436.4
-    m_Scale: {x: 1.2448398, y: 1.24484}
-    m_Translation: {x: 433.39935, y: 218.19992}
-    m_MarginLeft: 0
-    m_MarginRight: 0
-    m_MarginTop: 0
-    m_MarginBottom: 0
-    m_LastShownAreaInsideMargins:
-      serializedVersion: 2
-      x: -348.15674
-      y: -175.28351
-      width: 696.31445
-      height: 350.56714
-    m_MinimalGUI: 1
-  m_defaultScale: 0.50509256
-  m_LastWindowPixelSize: {x: 1083.4999, y: 571.75}
-  m_ClearInEditMode: 1
-  m_NoCameraWarning: 1
-  m_LowResolutionForAspectRatios: 01000000000000000000
-  m_XRRenderMode: 0
-  m_RenderTexture: {fileID: 0}
+    x: 0
+    y: 472.8
+    width: 1155.2
+    height: 250
+  m_MinSize: {x: 200, y: 100}
+  m_MaxSize: {x: 16192, y: 8096}
+  vertical: 0
+  controlID: 1059
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -677,11 +658,11 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 478.4
-    width: 1155.2
-    height: 244.4
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
+    y: 0
+    width: 783.2
+    height: 250
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
   m_ActualView: {fileID: 11}
   m_Panes:
   - {fileID: 11}
@@ -711,9 +692,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 552
-    width: 1154.2
-    height: 223.4
+    y: 546.4
+    width: 782.2
+    height: 229
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -743,10 +724,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 8.600006}
-    m_SelectedIDs: 406c0000
-    m_LastClickedID: 27712
-    m_ExpandedIDs: 00000000406c000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 7e710000
+    m_LastClickedID: 29054
+    m_ExpandedIDs: 0000000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -799,8 +780,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 246a0000
-    m_LastClickedInstanceID: 27172
+    m_SelectedInstanceIDs: f46c0000
+    m_LastClickedInstanceID: 27892
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000706a0000746a0000
     m_RenameOverlay:
@@ -826,7 +807,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 25}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
@@ -852,9 +833,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 552
-    width: 1160.6
-    height: 223.4
+    y: 546.4
+    width: 793.4
+    height: 229
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -881,14 +862,40 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 552
-    width: 795
-    height: 223.4
+    y: 546.4
+    width: 793.4
+    height: 229
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
 --- !u!114 &14
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: GameView
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 783.2
+    y: 0
+    width: 371.99994
+    height: 250
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 2}
+  m_Panes:
+  - {fileID: 2}
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -907,15 +914,87 @@ MonoBehaviour:
     y: 0
     width: 380.80005
     height: 722.8
-  m_MinSize: {x: 276, y: 71}
+  m_MinSize: {x: 276, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 2}
+  m_ActualView: {fileID: 16}
   m_Panes:
-  - {fileID: 2}
-  - {fileID: 15}
+  - {fileID: 16}
+  - {fileID: 17}
+  - {fileID: 18}
   m_Selected: 0
   m_LastSelected: 1
---- !u!114 &15
+--- !u!114 &16
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12019, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 275, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Inspector
+    m_Image: {fileID: -440750813802333266, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1155.2001
+    y: 73.6
+    width: 379.80005
+    height: 701.8
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+  m_ObjectsLockedBeforeSerialization: []
+  m_InstanceIDsLockedBeforeSerialization: 
+  m_PreviewResizer:
+    m_CachedPref: 160
+    m_ControlHash: 1412526313
+    m_PrefName: Preview_InspectorPreview
+  m_LastInspectedObjectInstanceID: 27892
+  m_LastVerticalScrollValue: 0
+  m_GlobalObjectId: 
+  m_InspectorMode: 0
+  m_LockTracker:
+    m_IsLocked: 0
+  m_PreviewWindow: {fileID: 0}
+--- !u!114 &17
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12079, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 390, y: 390}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Lighting
+    m_Image: {fileID: -1477008817101679558, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1155.2001
+    y: 73.6
+    width: 379.80005
+    height: 701.8
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -935,22 +1014,22 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1161.6
+    x: 1155.2001
     y: 73.6
-    width: 373.40002
+    width: 379.80005
     height: 701.8
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
-  progressMessageClearTime: 3328.5462119999997
+  progressMessageClearTime: -1
   notificationClearTime: -1
   timeSinceLastRotation: -1
   currentBranchAndRemoteHasUpdate: 0
-  currentTrackingStatusHasUpdate: 1
+  currentTrackingStatusHasUpdate: 0
   currentStatusEntriesHasUpdate: 0
   repositoryProgressHasUpdate: 1
-  appManagerProgressHasUpdate: 0
+  appManagerProgressHasUpdate: 1
   changeTab: 3
   activeTab: 3
   initProjectView:
@@ -1089,9 +1168,9 @@ MonoBehaviour:
       tracking: 
     remoteBranches: []
   changesView:
-    currentBranchHasUpdate: 0
-    currentStatusEntriesHasUpdate: 0
-    currentLocksHasUpdate: 0
+    currentBranchHasUpdate: 1
+    currentStatusEntriesHasUpdate: 1
+    currentLocksHasUpdate: 1
     commitBody: 
     commitMessage: 
     currentBranch: master
@@ -1100,15 +1179,15 @@ MonoBehaviour:
       assets:
         keys:
         - 00000000000000001000000000000000
-        - 3cbdebf8a6f98a44286468d6a95aecc3
         - 9c53962885c2c4f449125a979d6ad240
         - 99c9720ab356a0642a771bea13969a05
         - 91251939d221d55439f5217b4594ba24
         - c3d63a6364d6e244c96cc3761c803069
+        - 3e7846d5b7e674c48bf193801c3406f8
         - 25a9b0071defc104b96b0a26503aed78
-        - 8e42423658b93c543abfeb1ba8d8455f
-        - 34a0458c7a95dba4bbbf3d944a5157f5
         - 37e6b7fb4de157c438463866622dad83
+        - 85a7d29bdd6d54046a1d24b319dcd107
+        - 0f5b94b68f709f444b5055f6be31f562
         values:
         - path: Assets
           label: Assets
@@ -1128,25 +1207,6 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 0
-        - path: Assets\Game Lighting.lighting
-          label: Game Lighting.lighting
-          level: 1
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Game Lighting.lighting
-            fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Game
-              Lighting.lighting
-            projectPath: Assets\Game Lighting.lighting
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
         - path: Assets\Scenes
           label: Scenes
           level: 1
@@ -1219,6 +1279,24 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 3
+        - path: Assets\Scripts\ChunkUtils.cs
+          label: ChunkUtils.cs
+          level: 2
+          isFolder: 0
+          isContainer: 1
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\Scripts\ChunkUtils.cs
+            fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\ChunkUtils.cs
+            projectPath: Assets\Scripts\ChunkUtils.cs
+            originalPath: 
+            indexStatus: 1
+            workTreeStatus: 1
         - path: Assets\Scripts\ColumnDataGenerator.cs
           label: ColumnDataGenerator.cs
           level: 2
@@ -1234,42 +1312,6 @@ MonoBehaviour:
             path: Assets\Scripts\ColumnDataGenerator.cs
             fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\ColumnDataGenerator.cs
             projectPath: Assets\Scripts\ColumnDataGenerator.cs
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: Assets\Scripts\CubeMover.cs
-          label: CubeMover.cs
-          level: 2
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Scripts\CubeMover.cs
-            fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\CubeMover.cs
-            projectPath: Assets\Scripts\CubeMover.cs
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: Assets\Scripts\InfiniteTerrainGenerator.cs
-          label: InfiniteTerrainGenerator.cs
-          level: 2
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Scripts\InfiniteTerrainGenerator.cs
-            fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\InfiniteTerrainGenerator.cs
-            projectPath: Assets\Scripts\InfiniteTerrainGenerator.cs
             originalPath: 
             indexStatus: 0
             workTreeStatus: 3
@@ -1291,11 +1333,49 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 3
+        - path: Assets\Scripts\WorldChunk.cs
+          label: WorldChunk.cs
+          level: 2
+          isFolder: 0
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\Scripts\WorldChunk.cs
+            fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\WorldChunk.cs
+            projectPath: Assets\Scripts\WorldChunk.cs
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 3
+        - path: Assets\Scripts\WorldGenerator.cs
+          label: WorldGenerator.cs
+          level: 2
+          isFolder: 0
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\Scripts\WorldGenerator.cs
+            fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\WorldGenerator.cs
+            projectPath: Assets\Scripts\WorldGenerator.cs
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 3
       folders:
         keys:
         - Assets
         - Assets\Scenes
         - Assets\Scripts
+        - UserSettings
+        - UserSettings\Layouts
         values:
         - path: Assets
           label: Assets
@@ -1335,6 +1415,42 @@ MonoBehaviour:
             workTreeStatus: 0
         - path: Assets\Scripts
           label: Scripts
+          level: 1
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: UserSettings
+          label: UserSettings
+          level: 0
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: UserSettings\Layouts
+          label: Layouts
           level: 1
           isFolder: 1
           isContainer: 0
@@ -1397,44 +1513,6 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-      - path: Assets\Game Lighting.lighting
-        label: Game Lighting.lighting
-        level: 1
-        isFolder: 0
-        isContainer: 1
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Game Lighting.lighting
-          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Game
-            Lighting.lighting
-          projectPath: Assets\Game Lighting.lighting
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Game Lighting.lighting.meta
-        label: Game Lighting.lighting.meta
-        level: 2
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Game Lighting.lighting.meta
-          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Game
-            Lighting.lighting.meta
-          projectPath: Assets\Game Lighting.lighting.meta
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
       - path: Assets\Scenes
         label: Scenes
         level: 1
@@ -1507,6 +1585,42 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 3
+      - path: Assets\Scripts\ChunkUtils.cs
+        label: ChunkUtils.cs
+        level: 2
+        isFolder: 0
+        isContainer: 1
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\Scripts\ChunkUtils.cs
+          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\ChunkUtils.cs
+          projectPath: Assets\Scripts\ChunkUtils.cs
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: Assets\Scripts\ChunkUtils.cs.meta
+        label: ChunkUtils.cs.meta
+        level: 3
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\Scripts\ChunkUtils.cs.meta
+          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\ChunkUtils.cs.meta
+          projectPath: Assets\Scripts\ChunkUtils.cs.meta
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
       - path: Assets\Scripts\ColumnDataGenerator.cs
         label: ColumnDataGenerator.cs
         level: 2
@@ -1525,42 +1639,6 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 3
-      - path: Assets\Scripts\CubeMover.cs
-        label: CubeMover.cs
-        level: 2
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Scripts\CubeMover.cs
-          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\CubeMover.cs
-          projectPath: Assets\Scripts\CubeMover.cs
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: Assets\Scripts\InfiniteTerrainGenerator.cs
-        label: InfiniteTerrainGenerator.cs
-        level: 2
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Scripts\InfiniteTerrainGenerator.cs
-          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\InfiniteTerrainGenerator.cs
-          projectPath: Assets\Scripts\InfiniteTerrainGenerator.cs
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
       - path: Assets\Scripts\MeshGenerator.cs
         label: MeshGenerator.cs
         level: 2
@@ -1576,6 +1654,96 @@ MonoBehaviour:
           path: Assets\Scripts\MeshGenerator.cs
           fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\MeshGenerator.cs
           projectPath: Assets\Scripts\MeshGenerator.cs
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 3
+      - path: Assets\Scripts\WorldChunk.cs
+        label: WorldChunk.cs
+        level: 2
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\Scripts\WorldChunk.cs
+          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\WorldChunk.cs
+          projectPath: Assets\Scripts\WorldChunk.cs
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 3
+      - path: Assets\Scripts\WorldGenerator.cs
+        label: WorldGenerator.cs
+        level: 2
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\Scripts\WorldGenerator.cs
+          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\WorldGenerator.cs
+          projectPath: Assets\Scripts\WorldGenerator.cs
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 3
+      - path: UserSettings
+        label: UserSettings
+        level: 0
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: UserSettings\Layouts
+        label: Layouts
+        level: 1
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: UserSettings\Layouts\default-2021.dwlt
+        label: default-2021.dwlt
+        level: 2
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: UserSettings\Layouts\default-2021.dwlt
+          fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\UserSettings\Layouts\default-2021.dwlt
+          projectPath: UserSettings\Layouts\default-2021.dwlt
           originalPath: 
           indexStatus: 0
           workTreeStatus: 3
@@ -1599,20 +1767,6 @@ MonoBehaviour:
           indexStatus: 0
           workTreeStatus: 0
     gitStatusEntries:
-    - path: Assets\Game Lighting.lighting
-      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Game
-        Lighting.lighting
-      projectPath: Assets\Game Lighting.lighting
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Game Lighting.lighting.meta
-      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Game
-        Lighting.lighting.meta
-      projectPath: Assets\Game Lighting.lighting.meta
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
     - path: Assets\Scenes\SampleScene.unity
       fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scenes\SampleScene.unity
       projectPath: Assets\Scenes\SampleScene.unity
@@ -1625,21 +1779,21 @@ MonoBehaviour:
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
+    - path: Assets\Scripts\ChunkUtils.cs
+      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\ChunkUtils.cs
+      projectPath: Assets\Scripts\ChunkUtils.cs
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: Assets\Scripts\ChunkUtils.cs.meta
+      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\ChunkUtils.cs.meta
+      projectPath: Assets\Scripts\ChunkUtils.cs.meta
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
     - path: Assets\Scripts\ColumnDataGenerator.cs
       fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\ColumnDataGenerator.cs
       projectPath: Assets\Scripts\ColumnDataGenerator.cs
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
-    - path: Assets\Scripts\CubeMover.cs
-      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\CubeMover.cs
-      projectPath: Assets\Scripts\CubeMover.cs
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
-    - path: Assets\Scripts\InfiniteTerrainGenerator.cs
-      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\InfiniteTerrainGenerator.cs
-      projectPath: Assets\Scripts\InfiniteTerrainGenerator.cs
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
@@ -1649,15 +1803,33 @@ MonoBehaviour:
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    changedFilesText: 8 changed files
+    - path: Assets\Scripts\WorldChunk.cs
+      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\WorldChunk.cs
+      projectPath: Assets\Scripts\WorldChunk.cs
+      originalPath: 
+      indexStatus: 0
+      workTreeStatus: 3
+    - path: Assets\Scripts\WorldGenerator.cs
+      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\Assets\Scripts\WorldGenerator.cs
+      projectPath: Assets\Scripts\WorldGenerator.cs
+      originalPath: 
+      indexStatus: 0
+      workTreeStatus: 3
+    - path: UserSettings\Layouts\default-2021.dwlt
+      fullPath: C:\Users\coolk\OneDrive\Documents\Projects\Coding\Unity\PixelWave\UserSettings\Layouts\default-2021.dwlt
+      projectPath: UserSettings\Layouts\default-2021.dwlt
+      originalPath: 
+      indexStatus: 0
+      workTreeStatus: 3
+    changedFilesText: 9 changed files
     lastCurrentBranchChangedEvent:
-      updatedTimeString: 2023-04-12T18:25:00.492+02:00
+      updatedTimeString: 2023-04-15T19:05:41.018+02:00
       cacheType: 1
     lastStatusEntriesChangedEvent:
-      updatedTimeString: 2023-04-12T18:28:43.900+02:00
+      updatedTimeString: 2023-04-15T19:28:38.681+02:00
       cacheType: 6
     lastLocksChangedEvent:
-      updatedTimeString: 0001-01-01T00:00:00.000+00:00
+      updatedTimeString: 2023-04-15T19:28:45.961+02:00
       cacheType: 7
   historyView:
     currentLogHasUpdate: 0
@@ -4504,13 +4676,13 @@ MonoBehaviour:
     m_Image: {fileID: 0}
     m_Tooltip: Url of the origin remote
   lastCurrentBranchAndRemoteChangedEvent:
-    updatedTimeString: 2023-04-12T17:33:37.524+02:00
+    updatedTimeString: 2023-04-14T19:51:39.205+02:00
     cacheType: 1
   lastTrackingStatusChangedEvent:
-    updatedTimeString: 2023-04-12T18:30:32.086+02:00
+    updatedTimeString: 2023-04-14T19:51:39.303+02:00
     cacheType: 5
   lastStatusEntriesChangedEvent:
-    updatedTimeString: 2023-04-12T18:28:43.900+02:00
+    updatedTimeString: 2023-04-14T19:51:39.263+02:00
     cacheType: 6
   pullButtonContent:
     m_Text: Pull
@@ -4528,7 +4700,7 @@ MonoBehaviour:
     m_Text: Fetch
     m_Image: {fileID: 0}
     m_Tooltip: 
-  repositoryProgressValue: 0.9836066
+  repositoryProgressValue: 0
   repositoryProgressMessage: 
   appManagerProgressValue: 1
   appManagerProgressMessage: 

@@ -233,37 +233,24 @@ public class MeshGenerator
 
                         for (int i = 0; i < CheckDirections.Length; i++)
                         {
-                            bool _checkedBlockIsSolid = _chunk.GetBlock((_currentBlockPosition + CheckDirections[i])).IsSolid;
-                            try
+                            Vector3Int _blockToCheck = _currentBlockPosition + CheckDirections[i];
+                            bool _checkedBlockIsSolid = true;
+
+                            bool _outOfChunk = _blockToCheck.x > _blocksPerChunk || _blockToCheck.y > _blocksPerChunk || _blockToCheck.z > _blocksPerChunk || _blockToCheck.x < 0 || _blockToCheck.y < 0 || _blockToCheck.z < 0;
+                            //bool _outOfChunk = _blockToCheck.x > _blocksPerChunk || _blockToCheck.y > _blocksPerChunk || _blockToCheck.z > _blocksPerChunk;
+                            if (_outOfChunk) // checks if the block we want to check is out of bounds
                             {
-                                if (!_checkedBlockIsSolid)
+                                Vector3Int _neighboringChunk = _chunk.Position + CheckDirections[i]; // gets the neighboring chunk
+
+                                // if the neighboring chunk has been generated, check if the block in that chunk is solid
+                                if (WorldGenerator.WorldChunks.ContainsKey(_neighboringChunk))
                                 {
-                                    if (_currentBlockIsSolid)
-                                    {
-                                        int _currentBlockID = _chunk.GetBlock(_currentBlockPosition).BlockID;
-                                        TextureLoader.CubeTexture _textureToApply = textureLoaderInstance.Textures[_currentBlockID];
-
-                                        FaceData _faceToApply = cubeFaces[CheckDirections[i]];
-
-                                        foreach (Vector3 _vertex in _faceToApply.Vertices)
-                                        {
-                                            _vertices.Add(new Vector3(x, y, z) + _vertex);
-                                        }
-
-                                        foreach (int _triangle in _faceToApply.Indices)
-                                        {
-                                            _indices.Add(_vertices.Count - 4 + _triangle);
-                                        }
-
-                                        Vector2[] _UVsToAdd = _textureToApply.GetUVsAtDirectionT(CheckDirections[i]);
-                                        foreach (int _UVIndex in _faceToApply.UVIndexOrder)
-                                        {
-                                            _UVs.Add(_UVsToAdd[_UVIndex]);
-                                        }
-                                    }
+                                    _checkedBlockIsSolid = _chunk.GetBlockFromNeighbor(_neighboringChunk, _blockToCheck).IsSolid;
                                 }
                             }
-                            catch (System.Exception e)
+                            else _checkedBlockIsSolid = _chunk.GetBlock(_blockToCheck).IsSolid;
+                            
+                            if (!_checkedBlockIsSolid)
                             {
                                 if (_currentBlockIsSolid)
                                 {
@@ -272,9 +259,9 @@ public class MeshGenerator
 
                                     FaceData _faceToApply = cubeFaces[CheckDirections[i]];
 
-                                    foreach (Vector3 _vertice in _faceToApply.Vertices)
+                                    foreach (Vector3 _vertex in _faceToApply.Vertices)
                                     {
-                                        _vertices.Add(new Vector3(x, y, z) + _vertice);
+                                        _vertices.Add(new Vector3(x, y, z) + _vertex);
                                     }
 
                                     foreach (int _triangle in _faceToApply.Indices)

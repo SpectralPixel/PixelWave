@@ -53,28 +53,27 @@ public class ChunkDataGenerator
     public IEnumerator GenerateWorldChunk(Vector3Int _chunkPosition, int[,] _groundHeights, System.Action<WorldChunk> _callback)
     {
         int _blocksPerChunk = WorldGenerator.BlocksPerChunk;
-        int _verticesPerChunk = _blocksPerChunk + 1;
 
         int _worldHeight = generatorInstance.worldHeight;
         int _terrainOffset = generatorInstance.terrainOffset;
         float _heightIntensity = generatorInstance.heightIntensity;
 
-        Block[,,] _newChunkData = new Block[_verticesPerChunk, _verticesPerChunk, _verticesPerChunk]; // to the power of 3 because 3-dimensional
+        Block[,,] _newChunkData = new Block[_blocksPerChunk, _blocksPerChunk, _blocksPerChunk]; // to the power of 3 because 3-dimensional
 
         Task _task;
         // if the chunk is above bedrock and below the maximum height terrain can generate
-        if (LocalToWorldHeight(_worldHeight, _chunkPosition, _blocksPerChunk) < _blocksPerChunk && LocalToWorldHeight((int)(_terrainOffset * _heightIntensity + 3f), _chunkPosition, _blocksPerChunk) > 0)
+        if (ChunkUtils.LocalToWorldHeight(_worldHeight, _chunkPosition, _blocksPerChunk) < _blocksPerChunk && ChunkUtils.LocalToWorldHeight((int)(_terrainOffset * _heightIntensity + 3f), _chunkPosition, _blocksPerChunk) > 0)
         {
             _task = Task.Factory.StartNew(delegate
             {
-                for (int x = 0; x <= _blocksPerChunk; x++)
+                for (int x = 0; x < _blocksPerChunk; x++)
                 {
-                    for (int y = 0; y <= _blocksPerChunk; y++)
+                    for (int y = 0; y < _blocksPerChunk; y++)
                     {
-                        for (int z = 0; z <= _blocksPerChunk; z++)
+                        for (int z = 0; z < _blocksPerChunk; z++)
                         {
-                            int _groundHeight = LocalToWorldHeight(_groundHeights[x, z], _chunkPosition, _blocksPerChunk);
-                            int _minimumHeight = LocalToWorldHeight(_worldHeight, _chunkPosition, _blocksPerChunk);
+                            int _groundHeight = ChunkUtils.LocalToWorldHeight(_groundHeights[x, z], _chunkPosition, _blocksPerChunk);
+                            int _minimumHeight = ChunkUtils.LocalToWorldHeight(_worldHeight, _chunkPosition, _blocksPerChunk);
                             int _blockTypeToAssign = 0;
 
                             // create grass if at the top layer
@@ -123,12 +122,6 @@ public class ChunkDataGenerator
         WorldChunk _newChunk = new WorldChunk(_chunkPosition, _blocksPerChunk, _newChunkData);
         WorldGenerator.WorldChunks[_chunkPosition] = _newChunk;
         _callback(_newChunk);
-    }
-
-    int LocalToWorldHeight(int _localHeight, Vector3Int _chunkPosition, int _chunkSize)
-    {
-        int _globalHeight = (-_chunkPosition.y * _chunkSize) + _localHeight;
-        return _globalHeight;
     }
 
 }

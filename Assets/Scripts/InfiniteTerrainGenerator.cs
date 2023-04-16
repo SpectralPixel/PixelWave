@@ -7,12 +7,12 @@ public class InfiniteTerrainGenerator : MonoBehaviour
 
     [SerializeField] private Transform player;
     [SerializeField] private int renderDistance;
-    private List<Vector3Int> CoordsToRemove;
+    private List<Vector3Int> ChunksToRemove;
     private WorldGenerator worldGeneratorInstance;
 
     void Start()
     {
-        CoordsToRemove = new List<Vector3Int>();
+        ChunksToRemove = new List<Vector3Int>();
         worldGeneratorInstance = GetComponent<WorldGenerator>();
     }
 
@@ -22,11 +22,11 @@ public class InfiniteTerrainGenerator : MonoBehaviour
         int _playerChunkX = (int)player.position.x / WorldGenerator.BlocksPerChunk;
         int _playerChunkY = (int)player.position.y / WorldGenerator.BlocksPerChunk;
         int _playerChunkZ = (int)player.position.z / WorldGenerator.BlocksPerChunk;
-        CoordsToRemove.Clear();
+        ChunksToRemove.Clear();
 
         foreach (KeyValuePair<Vector3Int, GameObject> _activeChunk in WorldGenerator.ActiveChunks)
         {
-            CoordsToRemove.Add(_activeChunk.Key);
+            ChunksToRemove.Add(_activeChunk.Key);
         }
 
         for (int y = _playerChunkY + renderDistance; y >= _playerChunkY - renderDistance; y--)
@@ -42,12 +42,12 @@ public class InfiniteTerrainGenerator : MonoBehaviour
                         StartCoroutine(worldGeneratorInstance.CreateNewWorldChunk(_chunkCoord));
                     }
 
-                    CoordsToRemove.Remove(_chunkCoord);
+                    ChunksToRemove.Remove(_chunkCoord);
                 }
             }
         }
 
-        foreach (Vector3Int _coord in CoordsToRemove)
+        foreach (Vector3Int _coord in ChunksToRemove)
         {
             GameObject _chunkToDelete = WorldGenerator.ActiveChunks[_coord];
             WorldGenerator.ActiveChunks.Remove(_coord);
