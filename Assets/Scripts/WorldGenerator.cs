@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class WorldGenerator : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class WorldGenerator : MonoBehaviour
     public MeshGenerator MeshCreator;
     public ColumnDataGenerator ColumnGenerator;
     public ChunkDataGenerator ChunkGenerator;
+
+    private void Awake() => Instance = this;
 
     void Start()
     {
@@ -76,7 +79,6 @@ public class WorldGenerator : MonoBehaviour
 
         if (_newHeightData == null)
         {
-            //StartCoroutine(GenerateColumnData(_worldColumn, x => _newHeightData = x));
             ColumnGenerator.QueueColumnToGenerate(new ColumnDataGenerator.ColumnGenData
             {
                 GenerationPoint = _worldColumn,
@@ -88,7 +90,6 @@ public class WorldGenerator : MonoBehaviour
 
         if (_newChunkData == null) // if the chunkdata doesnt exists yet, generate it
         {
-            //StartCoroutine(GenerateWorldChunk(_chunkCoord, _newHeightData, x => _newChunkData = x));
             ChunkGenerator.QueueDataToGenerate(new ChunkDataGenerator.ChunkGenData
             {
                 GenerationPoint = _chunkCoord,
@@ -99,7 +100,6 @@ public class WorldGenerator : MonoBehaviour
             yield return new WaitUntil(() => _newChunkData != null);
         }
 
-        //StartCoroutine(meshCreator.CreateNewMesh(_newChunkData, x => _newChunkMesh = x));
         MeshCreator.QueueDataToDraw(new MeshGenerator.CreateMesh
         {
             DataToDraw = _newChunkData,
@@ -116,6 +116,23 @@ public class WorldGenerator : MonoBehaviour
             _newChunkFilter.mesh = _newChunkMesh;
             _newChunkRenderer.material = meshMaterial;
             _newChunkCollider.sharedMesh = _newChunkFilter.mesh;
+
+            _newChunk.layer = 6; // chunk layer
         }
+    }
+
+    public void UpdateChunkMesh(Vector3Int _chunkPosition, Block[,,] _newChunkData)
+    {
+        WorldChunks[_chunkPosition] = new WorldChunk(_chunkPosition, BlocksPerChunk, _newChunkData);
+
+        GameObject _targetChunk = ActiveChunks[_chunkPosition];
+        MeshFilter _targetFilter = _targetChunk.GetComponent<MeshFilter>();
+        MeshCollider _targetCollider = _targetChunk.GetComponent<MeshCollider>();
+
+        StartCoroutine(MeshCreator.CreateNewMesh(WorldChunks[_chunkPosition], x =>
+        {
+            _targetFilter.mesh = x;
+            _targetCollider.sharedMesh = x;
+        }));
     }
 }

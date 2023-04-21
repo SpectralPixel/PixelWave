@@ -5,6 +5,9 @@ using UnityEngine.InputSystem.XR;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float defaultMoveSpeed;
+    [SerializeField] private float jumpHeight;
+    [SerializeField] private float gravityMultiplier;
+
     private CharacterController cController;
 
     private Vector2 input;
@@ -13,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity;
 
     private float moveSpeed;
-    private float jumpHeight;
     private float gravity = -9.81f;
     private float fallSpeed;
 
@@ -35,8 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        fallSpeed = gravity * 2f;
-        jumpHeight = moveSpeed / 3f;
+        fallSpeed = gravity * gravityMultiplier;
 
         if (cController.isGrounded && velocity.y < 0)
         {
@@ -58,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (cController.isGrounded)
+        if (cController.isGrounded && context.started)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }

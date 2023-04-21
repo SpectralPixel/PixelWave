@@ -4,27 +4,20 @@ using UnityEngine;
 public static class ChunkUtils
 {
 
-    public static (Vector3Int, Vector3Int) WorldToLocalAndChunkPosition(Vector3Int _worldPosition, int _chunkSize)
+    public static Vector3Int WorldToChunkPos(Vector3 _worldPosition, int _chunkSize)
     {
-        int _localXPosition = _worldPosition.x % _chunkSize;
-        int _localYPosition = _worldPosition.y % _chunkSize;
-        int _localZPosition = _worldPosition.z % _chunkSize;
+        int _chunkPosX = Mathf.FloorToInt(_worldPosition.x / _chunkSize);
+        int _chunkPosY = Mathf.FloorToInt(_worldPosition.y / _chunkSize);
+        int _chunkPosZ = Mathf.FloorToInt(_worldPosition.z / _chunkSize);
 
-        int _chunkXPosition = Mathf.FloorToInt(_worldPosition.x / _chunkSize);
-        int _chunkYPosition = Mathf.FloorToInt(_worldPosition.y / _chunkSize);
-        int _chunkZPosition = Mathf.FloorToInt(_worldPosition.z / _chunkSize);
-
-        return (
-            new Vector3Int(_localXPosition, _localYPosition, _localZPosition),
-            new Vector3Int(_chunkXPosition, _chunkYPosition, _chunkZPosition)
-        ); // https://www.grepper.com/answers/494992/c%23+return+2+values?ucard=1
+        return new Vector3Int(_chunkPosX, _chunkPosY, _chunkPosZ);
     }
 
-    public static Vector3Int WorldToLocalPosition(Vector3Int _worldPosition, int _chunkSize)
+    public static Vector3Int WorldToLocalPosition(Vector3Int _worldPosition, Vector3Int _chunkCoords, int _chunkSize)
     {
-        int _localXPosition = _worldPosition.x % _chunkSize;
-        int _localYPosition = _worldPosition.y % _chunkSize;
-        int _localZPosition = _worldPosition.z % _chunkSize;
+        int _localXPosition = _worldPosition.x - (_chunkCoords.x * _chunkSize);
+        int _localYPosition = _worldPosition.y - (_chunkCoords.y * _chunkSize);
+        int _localZPosition = _worldPosition.z - (_chunkCoords.z * _chunkSize);
 
         return new Vector3Int(_localXPosition, _localYPosition, _localZPosition);
     }

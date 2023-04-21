@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 public class WorldChunk
@@ -34,32 +32,14 @@ public class WorldChunk
             if (WorldGenerator.WorldChunks.ContainsKey(Position + NeighborVectors[i]))
             {
                 neighbors[i] = WorldGenerator.WorldChunks[Position + NeighborVectors[i]];
-                neighbors[i].UpdateChunkMeshes(this, i);
             }
         }
     }
 
-    public IEnumerator UpdateChunkMeshes(WorldChunk _source, int _incomingDirection)
-    {
-        if (!neighbors.Contains(_source)) neighbors[(_incomingDirection + 3) % 6] = _source;
-
-        Mesh _newChunkMesh = null;
-
-        generatorInstance.MeshCreator.QueueDataToDraw(new MeshGenerator.CreateMesh
-        {
-            DataToDraw = this,
-            OnComplete = x => _newChunkMesh = x // sets _newChunkMesh to x when x is returned
-        });
-
-        // waits until _newChunkMesh is not null before excecuting following code (aka waits until mesh has been generated)
-        yield return new WaitUntil(() => _newChunkMesh != null);
-
-        WorldGenerator.ActiveChunks[Position].GetComponent<MeshFilter>().mesh = _newChunkMesh;
-    }
-
-    public void UpdateBlocks(Vector3Int _position, int _newBlock)
+    public void UpdateBlock(Vector3Int _position, int _newBlock)
     {
         ChunkData[_position.x, _position.y, _position.z] = new Block(_newBlock, _position);
+        generatorInstance.UpdateChunkMesh(Position, ChunkData);
     }
 
     public Block GetBlock(Vector3Int _position)
@@ -70,7 +50,7 @@ public class WorldChunk
         }
         catch (System.Exception e)
         {
-            ///Debug.LogError(e);
+            ///Debug.LogWarning(e);
             return new Block(0, new Vector3Int(0, 0, 0));
         }
     }
@@ -78,7 +58,7 @@ public class WorldChunk
     public Block GetBlockFromNeighbor(Vector3Int _neighbor, Vector3Int _relativePosition)
     {
         Vector3Int _globalPosition = ChunkUtils.LocalToWorldPosition(_relativePosition, Position, size);
-        Vector3Int _position = ChunkUtils.WorldToLocalPosition(_globalPosition, size);
+        Vector3Int _position = ChunkUtils.WorldToLocalPosition(_globalPosition, Position, size);
 
         WorldChunk _neighborChunk = WorldGenerator.WorldChunks[_neighbor];
         return _neighborChunk.GetBlock(_position);

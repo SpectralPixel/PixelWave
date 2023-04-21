@@ -31,7 +31,6 @@ public class InfiniteTerrainGenerator : MonoBehaviour
 
         for (int y = _playerChunkY + renderDistance; y >= _playerChunkY - renderDistance; y--)
         {
-            
             for (int z = _playerChunkZ - renderDistance; z <= _playerChunkZ + renderDistance; z++)
             {
                 for (int x = _playerChunkX - renderDistance; x <= _playerChunkX + renderDistance; x++)
@@ -53,6 +52,5 @@ public class InfiniteTerrainGenerator : MonoBehaviour
             WorldGenerator.ActiveChunks.Remove(_coord);
             Destroy(_chunkToDelete);
         }
-
     }
 }
