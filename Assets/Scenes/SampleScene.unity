@@ -270,11 +270,35 @@ MonoBehaviour:
     m_ActionId: f7b1209e-9270-4e4d-afd4-c399db14a186
     m_ActionName: Player/Build[/Mouse/rightButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 164858872}
+        m_TargetAssemblyTypeName: PlayerHand, Assembly-CSharp
+        m_MethodName: NextItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e973b0f8-0976-4de2-94fc-9f550d0a540d
     m_ActionName: Player/Next Item[/Mouse/scroll/down]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 164858872}
+        m_TargetAssemblyTypeName: PlayerHand, Assembly-CSharp
+        m_MethodName: LastItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1a9c8c76-7ae4-4d90-b995-e19a09428f9c
     m_ActionName: Player/Previous Item[/Mouse/scroll/up]
   - m_PersistentCalls:

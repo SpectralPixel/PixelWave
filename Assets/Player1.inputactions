@@ -270,6 +270,17 @@
                 },
                 {
                     "name": "",
+                    "id": "92ecd3c1-ef63-4044-a490-b4b3032823e4",
+                    "path": "<Keyboard>/#(.)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Next Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "16cf3da0-3d33-4238-a6c7-c1f69326ce8e",
                     "path": "<Mouse>/scroll/up",
                     "interactions": "",
@@ -286,6 +297,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "Previous Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b0eb9196-3110-432c-82e4-a2bb5ce97e7d",
+                    "path": "<Keyboard>/#(,)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Previous Item",
                     "isComposite": false,
                     "isPartOfComposite": false

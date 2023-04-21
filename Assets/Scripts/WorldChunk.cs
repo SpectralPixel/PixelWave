@@ -36,9 +36,9 @@ public class WorldChunk
         }
     }
 
-    public void UpdateBlock(Vector3Int _position, int _newBlock)
+    public void UpdateBlock(Block _newBlock)
     {
-        ChunkData[_position.x, _position.y, _position.z] = new Block(_newBlock, _position);
+        ChunkData[_newBlock.LocalPosition.x, _newBlock.LocalPosition.y, _newBlock.LocalPosition.z] = _newBlock;
         generatorInstance.UpdateChunkMesh(Position, ChunkData);
     }
 

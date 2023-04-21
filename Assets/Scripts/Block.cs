@@ -11,6 +11,8 @@ public class Block
     public bool IsSolid;
     public bool IsTransparent;
 
+    public static readonly int BlockIDs = 6;
+
     public Block(int _blockID, Vector3Int _localPosition)
     {
         BlockID = _blockID;

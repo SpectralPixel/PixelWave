@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,13 @@ public class PlayerHand : MonoBehaviour
     [SerializeField] private LayerMask playerCheckMask;
     [SerializeField] private Transform playerCam;
     [SerializeField] private float interactRange;
+
+    private int itemInHand;
+
+    private void Start()
+    {
+        itemInHand = 3;
+    }
 
     public void Break(InputAction.CallbackContext context)
     {
@@ -36,7 +44,7 @@ public class PlayerHand : MonoBehaviour
 
                     Vector3Int _blockToUpdate = ChunkUtils.WorldToLocalPosition(_targetBlock, _chunkPosition, WorldGenerator.BlocksPerChunk);
 
-                    _chunkToUpdate.UpdateBlock(_blockToUpdate, 0);
+                    _chunkToUpdate.UpdateBlock(new Block(0, _blockToUpdate));
                 }
             }
         }
@@ -72,10 +80,30 @@ public class PlayerHand : MonoBehaviour
 
                         Vector3Int _blockToUpdate = ChunkUtils.WorldToLocalPosition(_targetBlock, _chunkPosition, WorldGenerator.BlocksPerChunk);
 
-                        _chunkToUpdate.UpdateBlock(_blockToUpdate, 4);
+                        _chunkToUpdate.UpdateBlock(new Block(itemInHand, _blockToUpdate));
                     }
                 }
             }
+        }
+    }
+
+    public void NextItem(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            itemInHand++;
+            if (itemInHand > Block.BlockIDs) itemInHand = 1;
+            Debug.Log(itemInHand);
+        }
+    }
+
+    public void LastItem(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            itemInHand--;
+            if (itemInHand <= 0) itemInHand = Block.BlockIDs;
+            Debug.Log(itemInHand);
         }
     }
 }
