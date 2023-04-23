@@ -233,24 +233,34 @@ public class MeshGenerator
 
                         for (int i = 0; i < CheckDirections.Length; i++)
                         {
-                            Vector3Int _blockToCheck = _currentBlockPosition + CheckDirections[i];
+                            Vector3Int _blockToCheckPos = _currentBlockPosition + CheckDirections[i];
+                            Block _blockToCheck;
                             bool _checkedBlockIsSolid = true;
+                            bool _checkedBlockIsTransparent = false;
 
-                            bool _outOfChunk = _blockToCheck.x > _blocksPerChunk || _blockToCheck.y > _blocksPerChunk || _blockToCheck.z > _blocksPerChunk || _blockToCheck.x < 0 || _blockToCheck.y < 0 || _blockToCheck.z < 0;
-                            //bool _outOfChunk = _blockToCheck.x > _blocksPerChunk || _blockToCheck.y > _blocksPerChunk || _blockToCheck.z > _blocksPerChunk;
-                            if (_outOfChunk) // checks if the block we want to check is out of bounds
+                            try
+                            {
+                                _blockToCheck = _chunk.GetBlock(_blockToCheckPos);
+
+                                _checkedBlockIsSolid = _blockToCheck.IsSolid;
+                                _checkedBlockIsTransparent = _blockToCheck.IsTransparent;
+                            }
+                            catch
                             {
                                 Vector3Int _neighboringChunk = _chunk.Position + CheckDirections[i]; // gets the neighboring chunk
 
                                 // if the neighboring chunk has been generated, check if the block in that chunk is solid
                                 if (WorldGenerator.WorldChunks.ContainsKey(_neighboringChunk))
                                 {
-                                    _checkedBlockIsSolid = _chunk.GetBlockFromNeighbor(_neighboringChunk, _blockToCheck).IsSolid;
+                                    _blockToCheck = _chunk.GetBlockFromNeighbor(_neighboringChunk, _blockToCheckPos);
+
+                                    _checkedBlockIsSolid = _blockToCheck.IsSolid;
+                                    _checkedBlockIsTransparent = _blockToCheck.IsTransparent;
                                 }
                             }
-                            else _checkedBlockIsSolid = _chunk.GetBlock(_blockToCheck).IsSolid;
-                            
-                            if (!_checkedBlockIsSolid)
+
+
+                            if (!_checkedBlockIsSolid || _checkedBlockIsTransparent)
                             {
                                 if (_currentBlockIsSolid)
                                 {

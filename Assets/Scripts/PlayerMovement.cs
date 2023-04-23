@@ -62,7 +62,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void MovePlayer(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
+    public void MoveCamera(InputAction.CallbackContext context) => lookInput = context.ReadValue<Vector2>();
 
+    // https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/QuickStartGuide.html
     public void Jump(InputAction.CallbackContext context)
     {
         if (cController.isGrounded && context.started)
@@ -71,10 +73,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/QuickStartGuide.html
-    public void MoveCamera(InputAction.CallbackContext context)
-    {
-        lookInput = context.ReadValue<Vector2>();
-        Debug.Log(lookInput);
-    }
 }
