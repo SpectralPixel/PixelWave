@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,8 +9,10 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController cController;
 
-    private Vector2 input;
-    private Vector3 position;
+    private Vector2 lookInput;
+    private Vector2 camRot = Vector2.zero; // camera rotation
+
+    private Vector2 moveInput;
     private Vector3 movement;
     private Vector3 velocity;
 
@@ -24,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float lookLimit;
     [SerializeField] private float sensitivity;
 
-    private Vector2 camRot = Vector2.zero; // camera rotation
-
     void Start()
     {
         cController = GetComponent<CharacterController>();
@@ -33,6 +32,16 @@ public class PlayerMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void Update()
+    {
+        camRot += lookInput * sensitivity * Time.deltaTime;
+
+        camRot.y = Mathf.Clamp(camRot.y, -lookLimit, lookLimit);
+
+        cam.localEulerAngles = new Vector3(-camRot.y, 0, 0);
+        transform.localEulerAngles = new Vector3(0, camRot.x, 0);
     }
 
     void FixedUpdate()
@@ -44,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        movement = transform.right * input.x + transform.forward * input.y;
+        movement = transform.right * moveInput.x + transform.forward * moveInput.y;
 
         cController.Move(movement * moveSpeed * Time.fixedDeltaTime);
 
@@ -52,10 +61,7 @@ public class PlayerMovement : MonoBehaviour
         cController.Move(velocity * Time.fixedDeltaTime);
     }
 
-    public void MovePlayer(InputAction.CallbackContext context)
-    {
-        input = context.ReadValue<Vector2>();
-    }
+    public void MovePlayer(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
 
     public void Jump(InputAction.CallbackContext context)
     {
@@ -68,11 +74,7 @@ public class PlayerMovement : MonoBehaviour
     // https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/QuickStartGuide.html
     public void MoveCamera(InputAction.CallbackContext context)
     {
-        camRot += context.ReadValue<Vector2>() * sensitivity * Time.deltaTime;
-
-        camRot.y = Mathf.Clamp(camRot.y, -lookLimit, lookLimit);
-
-        cam.localEulerAngles = new Vector3(-camRot.y, 0, 0);
-        transform.localEulerAngles = new Vector3(0, camRot.x, 0);
+        lookInput = context.ReadValue<Vector2>();
+        Debug.Log(lookInput);
     }
 }

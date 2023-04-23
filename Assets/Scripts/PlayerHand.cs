@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,7 +20,7 @@ public class PlayerHand : MonoBehaviour
 
     public void Break(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             Ray _camRay = new Ray(playerCam.position, playerCam.forward);
             if (Physics.Raycast(_camRay, out RaycastHit hitInfo, interactRange, chunkInteractMask))
@@ -54,7 +53,7 @@ public class PlayerHand : MonoBehaviour
 
     public void Build(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             Ray _camRay = new Ray(playerCam.position, playerCam.forward);
             if (Physics.Raycast(_camRay, out RaycastHit hitInfo, interactRange, chunkInteractMask))
