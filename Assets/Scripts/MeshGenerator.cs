@@ -213,7 +213,7 @@ public class MeshGenerator
     {
         Mesh _mesh = new Mesh();
 
-        int _blocksPerChunk = _chunk.size;
+        int _blocksPerChunk = _chunk.Size;
         int _verticesPerChunk = _blocksPerChunk + 1;
 
         List<Vector3> _vertices = new List<Vector3>();
@@ -222,11 +222,11 @@ public class MeshGenerator
 
         Task _task = Task.Factory.StartNew(delegate
         {
-            for (int x = 0; x < _verticesPerChunk; x++) // loops over all dimensions
+            for (int x = 0; x < _blocksPerChunk; x++) // loops over all dimensions
             {
-                for (int y = 0; y < _verticesPerChunk; y++)
+                for (int y = 0; y < _blocksPerChunk; y++)
                 {
-                    for (int z = 0; z < _verticesPerChunk; z++)
+                    for (int z = 0; z < _blocksPerChunk; z++)
                     {
                         Vector3Int _currentBlockPosition = new Vector3Int(x, y, z);
                         bool _currentBlockIsSolid = _chunk.GetBlock(_currentBlockPosition).IsSolid;
@@ -235,16 +235,16 @@ public class MeshGenerator
                         {
                             Vector3Int _blockToCheckPos = _currentBlockPosition + CheckDirections[i];
                             Block _blockToCheck;
-                            bool _checkedBlockIsSolid = true;
+                            bool _checkedBlockIsSolid = false;
                             bool _checkedBlockIsTransparent = false;
 
-                            try
-                            {
+                            //try
+                            //{
                                 _blockToCheck = _chunk.GetBlock(_blockToCheckPos);
 
                                 _checkedBlockIsSolid = _blockToCheck.IsSolid;
                                 _checkedBlockIsTransparent = _blockToCheck.IsTransparent;
-                            }
+                            /*}
                             catch
                             {
                                 Vector3Int _neighboringChunk = _chunk.Position + CheckDirections[i]; // gets the neighboring chunk
@@ -257,8 +257,7 @@ public class MeshGenerator
                                     _checkedBlockIsSolid = _blockToCheck.IsSolid;
                                     _checkedBlockIsTransparent = _blockToCheck.IsTransparent;
                                 }
-                            }
-
+                            }*/
 
                             if (!_checkedBlockIsSolid || _checkedBlockIsTransparent)
                             {
