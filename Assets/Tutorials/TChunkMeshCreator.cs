@@ -248,7 +248,7 @@ public class TChunkMeshCreator
                                     }
                                 }
                             }
-                            catch (System.Exception e)
+                            catch
                             {
                                 ///Debug.LogWarning(e);
                                 if (_data[_blockPos.x, _blockPos.y, _blockPos.z] != 0)

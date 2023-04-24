@@ -4,7 +4,7 @@ public class WorldChunk
 {
     public Vector3Int Position;
     public Block[,,] ChunkData;
-    public int size;
+    public int Size;
 
     private WorldChunk[] neighbors;
     private WorldGenerator generatorInstance;
@@ -22,7 +22,7 @@ public class WorldChunk
     public WorldChunk(Vector3Int _position, int _size, Block[,,] _chunkData)
     {
         Position = _position;
-        size = _size;
+        Size = _size;
         ChunkData = _chunkData;
         generatorInstance = WorldGenerator.Instance;
 
@@ -40,6 +40,20 @@ public class WorldChunk
     {
         ChunkData[_newBlock.LocalPosition.x, _newBlock.LocalPosition.y, _newBlock.LocalPosition.z] = _newBlock;
         generatorInstance.UpdateChunkMesh(Position, ChunkData);
+
+        for (int i = 0; i < NeighborVectors.Length; i++)
+        {
+            int _neighborX = _newBlock.LocalPosition.x + NeighborVectors[i].x;
+            int _neighborY = _newBlock.LocalPosition.y + NeighborVectors[i].y;
+            int _neighborZ = _newBlock.LocalPosition.z + NeighborVectors[i].z;
+
+            bool _updateNeigbors = _neighborX <= 0 || _neighborY <= 0 || _neighborZ <= 0 || _neighborX >= (Size - 1) || _neighborY >= (Size - 1) || _neighborZ >= (Size - 1);
+            if (_updateNeigbors)
+            {
+                Vector3Int _neighborPosition = Position + NeighborVectors[i];
+                generatorInstance.UpdateChunkMesh(_neighborPosition, WorldGenerator.WorldChunks[_neighborPosition].ChunkData);
+            }
+        }
     }
 
     public Block GetBlock(Vector3Int _position)
@@ -48,17 +62,34 @@ public class WorldChunk
         {
             return ChunkData[_position.x, _position.y, _position.z];
         }
-        catch (System.Exception e)
+        catch
         {
-            ///Debug.LogWarning(e);
-            return new Block(0, new Vector3Int(0, 0, 0));
+            try
+            {
+                Vector3Int _worldPosition = ChunkUtils.LocalToWorldPosition(_position, Position, Size);
+                return WGetBlockFromNeighbor(_worldPosition);
+            }
+            catch
+            {
+                Debug.Log(_position);
+                return new Block(0, new Vector3Int(0, 0, 0));
+            }
         }
     }
 
     public Block GetBlockFromNeighbor(Vector3Int _neighbor, Vector3Int _relativePosition)
     {
-        Vector3Int _globalPosition = ChunkUtils.LocalToWorldPosition(_relativePosition, Position, size);
-        Vector3Int _position = ChunkUtils.WorldToLocalPosition(_globalPosition, Position, size);
+        Vector3Int _worldPosition = ChunkUtils.LocalToWorldPosition(_relativePosition, Position, Size);
+        Vector3Int _position = ChunkUtils.WorldToLocalPosition(_worldPosition, _neighbor, Size);
+
+        WorldChunk _neighborChunk = WorldGenerator.WorldChunks[_neighbor];
+        return _neighborChunk.GetBlock(_position);
+    }
+
+    public Block WGetBlockFromNeighbor(Vector3Int _worldPosition)
+    {
+        Vector3Int _neighbor = ChunkUtils.WorldToChunkPos(_worldPosition, Size);
+        Vector3Int _position = ChunkUtils.WorldToLocalPosition(_worldPosition, _neighbor, Size);
 
         WorldChunk _neighborChunk = WorldGenerator.WorldChunks[_neighbor];
         return _neighborChunk.GetBlock(_position);

@@ -319,7 +319,7 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!143 &164858871
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 781164119}
-  renderDistance: 4
+  renderDistance: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 164858867}
-  renderDistance: 2
+  renderDistance: 1
 --- !u!65 &385497916
 BoxCollider:
   m_ObjectHideFlags: 0

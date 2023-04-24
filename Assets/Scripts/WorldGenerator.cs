@@ -46,17 +46,6 @@ public class WorldGenerator : MonoBehaviour
         VertecesPerChunk = BlocksPerChunk + 1;
 
         worldHeight = terrainOffset - worldHeight;
-
-        /*for (int x = -2; x < 2; x++)
-        {
-            for (int y = -2; y < 2; y++)
-            {
-                for (int z = -2; z < 2; z++)
-                {
-                    CreateNewWorldChunk(new Vector3Int(x, y, z));
-                }
-            }
-        }*/
     }
 
     public IEnumerator CreateNewWorldChunk(Vector3Int _chunkCoord)
@@ -121,7 +110,7 @@ public class WorldGenerator : MonoBehaviour
         }
     }
 
-    public void UpdateChunkMesh(Vector3Int _chunkPosition, Block[,,] _newChunkData)
+    public void UpdateChunkMesh(Vector3Int _chunkPosition, Block[,,] _newChunkData) /////////////////////////////////////////////// UPDATE NEIGHBORING CHUNKS IF UPDATE IS ON BORDER
     {
         WorldChunks[_chunkPosition] = new WorldChunk(_chunkPosition, BlocksPerChunk, _newChunkData);
 
