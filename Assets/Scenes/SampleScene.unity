@@ -697,12 +697,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5b94b68f709f444b5055f6be31f562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParallelGenerationCap: 4
-  noiseScale: {x: 7, y: 7}
-  noiseOffset: {x: 0, y: 0}
-  terrainOffset: 64
-  worldHeight: 256
-  heightIntensity: 50
+  ParallelGenerationCap: 2
+  NoiseScale: {x: 3, y: 3}
+  NoiseOffset: {x: 0, y: 0}
+  TerrainOffset: 64
+  WorldHeight: 128
+  HeightIntensity: 25
   meshMaterial: {fileID: 2100000, guid: d661fb3c7c012f04688b83befb01039f, type: 2}
   VertecesPerChunk: 0
   TextureLoaderInstance: {fileID: 385497914}
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 164858867}
-  renderDistance: 1
+  renderDistance: 4
 --- !u!65 &385497916
 BoxCollider:
   m_ObjectHideFlags: 0

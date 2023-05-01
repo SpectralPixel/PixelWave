@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class WorldGenerator : MonoBehaviour
 {
@@ -13,14 +10,16 @@ public class WorldGenerator : MonoBehaviour
     public static Dictionary<Vector2Int, int[,]> WorldChunkColumns;
     public static Dictionary<Vector3Int, GameObject> ActiveChunks;
 
+    private List<Vector3Int> ChunksWithMeshes;
+
     static readonly public int BlocksPerChunk = 16;
     public int ParallelGenerationCap;
     [Space]
-    public Vector2 noiseScale;
-    public Vector2 noiseOffset;
-    public int terrainOffset;
-    public int worldHeight;
-    public float heightIntensity;
+    public Vector2 NoiseScale;
+    public Vector2 NoiseOffset;
+    public int TerrainOffset;
+    public int WorldHeight;
+    public float HeightIntensity;
     [Space]
     [SerializeField] private Material meshMaterial;
 
@@ -39,13 +38,15 @@ public class WorldGenerator : MonoBehaviour
         WorldChunkColumns = new Dictionary<Vector2Int, int[,]>();
         ActiveChunks = new Dictionary<Vector3Int, GameObject>();
 
+        ChunksWithMeshes = new List<Vector3Int>();
+
         MeshCreator = new MeshGenerator(TextureLoaderInstance, this);
         ColumnGenerator = new ColumnDataGenerator(this);
         ChunkGenerator = new ChunkDataGenerator(this);
 
         VertecesPerChunk = BlocksPerChunk + 1;
 
-        worldHeight = terrainOffset - worldHeight;
+        WorldHeight = TerrainOffset - WorldHeight;
     }
 
     public IEnumerator CreateNewWorldChunk(Vector3Int _chunkCoord)
@@ -54,8 +55,7 @@ public class WorldGenerator : MonoBehaviour
         GameObject _newChunk = new GameObject(_newChunkName, new System.Type[]
         {
             typeof(MeshRenderer),
-            typeof(MeshFilter),
-            typeof(MeshCollider)
+            typeof(MeshFilter)
         });
 
         _newChunk.transform.position = new Vector3(_chunkCoord.x * 16f, _chunkCoord.y * 16f, _chunkCoord.z * 16f);
@@ -100,13 +100,23 @@ public class WorldGenerator : MonoBehaviour
         {
             MeshRenderer _newChunkRenderer = _newChunk.GetComponent<MeshRenderer>();
             MeshFilter _newChunkFilter = _newChunk.GetComponent<MeshFilter>();
-            MeshCollider _newChunkCollider = _newChunk.GetComponent<MeshCollider>();
 
-            _newChunkFilter.mesh = _newChunkMesh;
             _newChunkRenderer.material = meshMaterial;
-            _newChunkCollider.sharedMesh = _newChunkFilter.mesh;
+            _newChunkFilter.mesh = _newChunkMesh;
+            ChunksWithMeshes.Add(_chunkCoord);
 
             _newChunk.layer = 6; // chunk layer
+        }
+    }
+
+    public void CreateChunkCollider(Vector3Int _chunkCoord)
+    {
+        GameObject _currentChunk = ActiveChunks[_chunkCoord];
+        MeshFilter _meshFilter = _currentChunk.GetComponent<MeshFilter>();
+        if (ChunksWithMeshes.Contains(_chunkCoord))
+        {
+            MeshCollider _meshCollider = _currentChunk.AddComponent<MeshCollider>();
+            _meshCollider.sharedMesh = _meshFilter.mesh;
         }
     }
 
@@ -116,6 +126,8 @@ public class WorldGenerator : MonoBehaviour
 
         GameObject _targetChunk = ActiveChunks[_chunkPosition];
         MeshFilter _targetFilter = _targetChunk.GetComponent<MeshFilter>();
+
+        if (_targetChunk.GetComponent<MeshCollider>() == null) CreateChunkCollider(_chunkPosition);
         MeshCollider _targetCollider = _targetChunk.GetComponent<MeshCollider>();
 
         StartCoroutine(MeshCreator.CreateNewMesh(WorldChunks[_chunkPosition], x =>

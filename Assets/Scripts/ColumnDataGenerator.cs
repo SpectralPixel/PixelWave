@@ -54,10 +54,10 @@ public class ColumnDataGenerator
         int _blocksPerChunk = WorldGenerator.BlocksPerChunk;
         int _perlinOctaves = 3;
 
-        Vector2 noiseOffset = generatorInstance.noiseOffset;
-        Vector2 noiseScale = generatorInstance.noiseScale;
-        float heightIntensity = generatorInstance.heightIntensity;
-        int terrainOffset = generatorInstance.terrainOffset;
+        Vector2 noiseOffset = generatorInstance.NoiseOffset;
+        Vector2 noiseScale = generatorInstance.NoiseScale;
+        float heightIntensity = generatorInstance.HeightIntensity;
+        int terrainOffset = generatorInstance.TerrainOffset;
 
         int[,] _groundHeights = new int[_blocksPerChunk, _blocksPerChunk];
 

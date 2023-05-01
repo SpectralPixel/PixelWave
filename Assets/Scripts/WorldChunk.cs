@@ -6,32 +6,26 @@ public class WorldChunk
     public Block[,,] ChunkData;
     public int Size;
 
+    private Vector3Int[] neighborVectors;
+
     private WorldChunk[] neighbors;
     private WorldGenerator generatorInstance;
-
-    static readonly Vector3Int[] NeighborVectors = new Vector3Int[]
-    {
-        Vector3Int.up,
-        Vector3Int.forward,
-        Vector3Int.right,
-        Vector3Int.down,
-        Vector3Int.back,
-        Vector3Int.left
-    };
 
     public WorldChunk(Vector3Int _position, int _size, Block[,,] _chunkData)
     {
         Position = _position;
         Size = _size;
         ChunkData = _chunkData;
+
         generatorInstance = WorldGenerator.Instance;
+        neighborVectors = ChunkUtils.NeighborVectors;
 
         neighbors = new WorldChunk[6]; // in 3d there are always 6 neighbors
         for (int i = 0; i < neighbors.Length; i += 2)
         {
-            if (WorldGenerator.WorldChunks.ContainsKey(Position + NeighborVectors[i]))
+            if (WorldGenerator.WorldChunks.ContainsKey(Position + neighborVectors[i]))
             {
-                neighbors[i] = WorldGenerator.WorldChunks[Position + NeighborVectors[i]];
+                neighbors[i] = WorldGenerator.WorldChunks[Position + neighborVectors[i]];
             }
         }
     }
@@ -41,16 +35,17 @@ public class WorldChunk
         ChunkData[_newBlock.LocalPosition.x, _newBlock.LocalPosition.y, _newBlock.LocalPosition.z] = _newBlock;
         generatorInstance.UpdateChunkMesh(Position, ChunkData);
 
-        for (int i = 0; i < NeighborVectors.Length; i++)
+        for (int i = 0; i < neighborVectors.Length; i++)
         {
-            int _neighborX = _newBlock.LocalPosition.x + NeighborVectors[i].x;
-            int _neighborY = _newBlock.LocalPosition.y + NeighborVectors[i].y;
-            int _neighborZ = _newBlock.LocalPosition.z + NeighborVectors[i].z;
+            int _neighborX = _newBlock.LocalPosition.x + neighborVectors[i].x;
+            int _neighborY = _newBlock.LocalPosition.y + neighborVectors[i].y;
+            int _neighborZ = _newBlock.LocalPosition.z + neighborVectors[i].z;
 
             bool _updateNeigbors = _neighborX <= 0 || _neighborY <= 0 || _neighborZ <= 0 || _neighborX >= (Size - 1) || _neighborY >= (Size - 1) || _neighborZ >= (Size - 1);
             if (_updateNeigbors)
             {
-                Vector3Int _neighborPosition = Position + NeighborVectors[i];
+                Debug.Log("Update On Edge");
+                Vector3Int _neighborPosition = Position + neighborVectors[i];
                 generatorInstance.UpdateChunkMesh(_neighborPosition, WorldGenerator.WorldChunks[_neighborPosition].ChunkData);
             }
         }
@@ -71,7 +66,7 @@ public class WorldChunk
             }
             catch
             {
-                Debug.Log(_position);
+                //Debug.Log(_position);
                 return new Block(0, new Vector3Int(0, 0, 0));
             }
         }

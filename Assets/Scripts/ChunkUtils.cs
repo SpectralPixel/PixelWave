@@ -4,6 +4,16 @@ using UnityEngine;
 public static class ChunkUtils
 {
 
+    public static readonly Vector3Int[] NeighborVectors = new Vector3Int[]
+    {
+        Vector3Int.up,
+        Vector3Int.forward,
+        Vector3Int.right,
+        Vector3Int.down,
+        Vector3Int.back,
+        Vector3Int.left
+    };
+
     public static Vector3Int WorldToChunkPos(Vector3 _worldPosition, int _chunkSize)
     {
         int _chunkPosX = Mathf.FloorToInt(_worldPosition.x / _chunkSize);

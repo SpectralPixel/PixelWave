@@ -54,9 +54,9 @@ public class ChunkDataGenerator
     {
         int _blocksPerChunk = WorldGenerator.BlocksPerChunk;
 
-        int _worldHeight = generatorInstance.worldHeight;
-        int _terrainOffset = generatorInstance.terrainOffset;
-        float _heightIntensity = generatorInstance.heightIntensity;
+        int _worldHeight = generatorInstance.WorldHeight;
+        int _terrainOffset = generatorInstance.TerrainOffset;
+        float _heightIntensity = generatorInstance.HeightIntensity;
 
         Block[,,] _newChunkData = new Block[_blocksPerChunk, _blocksPerChunk, _blocksPerChunk]; // to the power of 3 because 3-dimensional
 
