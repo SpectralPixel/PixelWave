@@ -229,7 +229,7 @@ public class MeshGenerator
                     for (int z = 0; z < _blocksPerChunk; z++)
                     {
                         Vector3Int _currentBlockPosition = new Vector3Int(x, y, z);
-                        bool _currentBlockIsSolid = _chunk.GetBlock(_currentBlockPosition).IsSolid;
+                        bool _currentBlockIsSolid = BlockUtils.IsSolid(_chunk.GetBlock(_currentBlockPosition));
 
                         for (int i = 0; i < CheckDirections.Length; i++)
                         {
@@ -242,8 +242,8 @@ public class MeshGenerator
                             //{
                                 _blockToCheck = _chunk.GetBlock(_blockToCheckPos);
 
-                                _checkedBlockIsSolid = _blockToCheck.IsSolid;
-                                _checkedBlockIsTransparent = _blockToCheck.IsTransparent;
+                                _checkedBlockIsSolid = BlockUtils.IsSolid(_blockToCheck);
+                                _checkedBlockIsTransparent = BlockUtils.IsTransparent(_blockToCheck);
                             /*}
                             catch
                             {

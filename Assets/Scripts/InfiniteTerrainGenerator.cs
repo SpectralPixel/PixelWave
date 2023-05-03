@@ -1,62 +1,43 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
+using UnityEngine.UIElements;
 
 public class InfiniteTerrainGenerator : MonoBehaviour
 {
 
     [SerializeField] private Transform player;
     [SerializeField] private int renderDistance;
-    private List<Vector3Int> ChunksToRemove;
+    private List<Vector3Int> ChunksToDelete;
     private WorldGenerator worldGeneratorInstance;
-
-    private Vector3Int[] neighborVectors;
+    private Vector3Int playerChunk;
 
     void Start()
     {
-        ChunksToRemove = new List<Vector3Int>();
+        ChunksToDelete = new List<Vector3Int>();
         worldGeneratorInstance = GetComponent<WorldGenerator>();
 
-        neighborVectors = ChunkUtils.NeighborVectors;
+        StartCoroutine(ChunkStateUpdate());
     }
 
-    void Update()
+    private void Update()
     {
         //converts player to chunk coords
-        int _playerChunkX = (int)player.position.x / WorldGenerator.BlocksPerChunk;
-        int _playerChunkY = (int)player.position.y / WorldGenerator.BlocksPerChunk;
-        int _playerChunkZ = (int)player.position.z / WorldGenerator.BlocksPerChunk;
-        Vector3Int _playerChunk = new Vector3Int(_playerChunkX, _playerChunkY, _playerChunkZ);
-        ChunksToRemove.Clear();
-
-        foreach (KeyValuePair<Vector3Int, GameObject> _activeChunk in WorldGenerator.ActiveChunks)
+        playerChunk = new Vector3Int
         {
-            ChunksToRemove.Add(_activeChunk.Key);
-        }
+            x = Mathf.RoundToInt(player.position.x / WorldGenerator.BlocksPerChunk),
+            y = Mathf.RoundToInt(player.position.y / WorldGenerator.BlocksPerChunk),
+            z = Mathf.RoundToInt(player.position.z / WorldGenerator.BlocksPerChunk)
+        };
 
-        for (int y = _playerChunkY + renderDistance; y >= _playerChunkY - renderDistance; y--)
+        for (int y = playerChunk.y + 1; y >= playerChunk.y - 1; y--)
         {
-            for (int z = _playerChunkZ - renderDistance; z <= _playerChunkZ + renderDistance; z++)
+            for (int z = playerChunk.z - 1; z <= playerChunk.z + 1; z++)
             {
-                for (int x = _playerChunkX - renderDistance; x <= _playerChunkX + renderDistance; x++)
-                {
-                    Vector3Int _chunkCoord = new Vector3Int(x, y, z);
-                    if (!WorldGenerator.ActiveChunks.ContainsKey(_chunkCoord))
-                    {
-                        StartCoroutine(worldGeneratorInstance.CreateNewWorldChunk(_chunkCoord));
-                    }
-
-                    ChunksToRemove.Remove(_chunkCoord);
-                }
-            }
-        }
-
-
-
-        for (int y = _playerChunkY + 1; y >= _playerChunkY - 1; y--)
-        {
-            for (int z = _playerChunkZ - 1; z <= _playerChunkZ + 1; z++)
-            {
-                for (int x = _playerChunkX - 1; x <= _playerChunkX + 1; x++)
+                for (int x = playerChunk.x - 1; x <= playerChunk.x + 1; x++)
                 {
                     Vector3Int _chunkCoord = new Vector3Int(x, y, z);
                     if (WorldGenerator.ActiveChunks.ContainsKey(_chunkCoord) && WorldGenerator.ActiveChunks[_chunkCoord].GetComponent<MeshCollider>() == null)
@@ -66,12 +47,49 @@ public class InfiniteTerrainGenerator : MonoBehaviour
                 }
             }
         }
+    }
 
-        foreach (Vector3Int _coord in ChunksToRemove)
+    IEnumerator ChunkStateUpdate()
+    {
+        while (true)
         {
-            GameObject _chunkToDelete = WorldGenerator.ActiveChunks[_coord];
-            WorldGenerator.ActiveChunks.Remove(_coord);
-            Destroy(_chunkToDelete);
+            ChunksToDelete.Clear();
+
+            foreach (KeyValuePair<Vector3Int, GameObject> _activeChunk in WorldGenerator.ActiveChunks)
+            {
+                ChunksToDelete.Add(_activeChunk.Key);
+            }
+
+            for (int y = playerChunk.y + renderDistance; y >= playerChunk.y - renderDistance; y--)
+            {
+                for (int z = playerChunk.z - renderDistance; z <= playerChunk.z + renderDistance; z++)
+                {
+                    for (int x = playerChunk.x - renderDistance; x <= playerChunk.x + renderDistance; x++)
+                    {
+                        Vector3Int _chunkCoord = new Vector3Int(x, y, z);
+
+                        if (!WorldGenerator.ActiveChunks.ContainsKey(_chunkCoord))
+                        {
+                            StartCoroutine(worldGeneratorInstance.CreateNewWorldChunk(_chunkCoord));
+
+                            yield return null;
+                        }
+
+                        ChunksToDelete.Remove(_chunkCoord);
+                    }
+                }
+            }
+
+            yield return null;
+
+            foreach (Vector3Int _coord in ChunksToDelete)
+            {
+                GameObject _chunkToDelete = WorldGenerator.ActiveChunks[_coord];
+                WorldGenerator.ActiveChunks.Remove(_coord);
+                Destroy(_chunkToDelete);
+
+                yield return null;
+            }
         }
     }
 }

@@ -91,7 +91,7 @@ public class PlayerHand : MonoBehaviour
         if (context.started)
         {
             itemInHand++;
-            if (itemInHand > Block.BlockIDs) itemInHand = 1;
+            if (itemInHand > BlockUtils.BlockIDs) itemInHand = 1;
             Debug.Log(itemInHand);
         }
     }
@@ -101,7 +101,7 @@ public class PlayerHand : MonoBehaviour
         if (context.started)
         {
             itemInHand--;
-            if (itemInHand <= 0) itemInHand = Block.BlockIDs;
+            if (itemInHand <= 0) itemInHand = BlockUtils.BlockIDs;
             Debug.Log(itemInHand);
         }
     }

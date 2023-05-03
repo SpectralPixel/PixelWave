@@ -697,7 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5b94b68f709f444b5055f6be31f562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParallelGenerationCap: 2
+  ParallelGenerationCap: 4
   NoiseScale: {x: 3, y: 3}
   NoiseOffset: {x: 0, y: 0}
   TerrainOffset: 64
@@ -865,7 +865,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 62, z: 0}
+  m_Center: {x: 0, y: 63, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
